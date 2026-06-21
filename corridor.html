@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Noida International Airport and Film City growth corridor along the Yamuna Expressway. Interactive landmark coordinates map.">
+  <title>Growth Corridor | Lakha's Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. Header & Navigation Bar -->
+  <header>
+    <div class="container">
+      <nav class="navbar" id="main-navigation">
+        <a href="index.html" class="logo-container" style="display: flex; align-items: center; gap: 14px;" aria-label="Lakha's Group Logo">
+          <img src="logo.png" alt="LG Logo" style="height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent); box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+          <div style="display: flex; flex-direction: column;">
+            <span class="logo company-logo-text" style="font-size: 1.4rem; font-weight: 800; line-height: 1.1; letter-spacing: 1.5px; color: var(--color-text-light);">LAKHA'S GROUP</span>
+            <span class="logo-sub company-logo-sub" style="font-size: 0.6rem; letter-spacing: 3px; color: var(--color-accent);">DEVELOPERS & INVESTMENTS</span>
+          </div>
+        </a>
+        <ul class="nav-menu" id="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="corridor.html" class="nav-link active">Growth Corridor</a></li>
+          <li><a href="listings.html" class="nav-link">Featured Plots</a></li>
+          <li><a href="calculator.html" class="nav-link">ROI Calculator</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="tel:+916396143510" class="btn btn-outline phone-contact-number">+91 63961 43510</a>
+          <a href="contact.html" class="btn btn-primary">Book Visit</a>
+        </div>
+        <div class="mobile-toggle" id="menu-toggle-btn">&#9776;</div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Subpage Hero -->
+  <div class="subpage-hero">
+    <h1>Yamuna Expressway Growth Corridor</h1>
+    <p>Visualizing the high-growth trajectory of Noida's aviation and industrial zone</p>
+  </div>
+
+  <!-- 3. Interactive Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Interactive Corridor Map</h2>
+        <p>Click on the nodes below to view key project distances, USPs, and infrastructure catalysts.</p>
+      </div>
+
+      <div class="map-container-layout">
+        <!-- Left: Interactive Map -->
+        <div class="interactive-map-wrapper">
+          <div id="expressway-map-container">
+            <!-- Dynamically generated SVG Expressway map will load here -->
+          </div>
+        </div>
+
+        <!-- Right: Detail Panel -->
+        <div class="landmark-panel" id="landmark-detail-panel">
+          <!-- Dynamically populated detail card based on node click -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Extra Corridor Projects Section -->
+  <section style="background-color: var(--color-bg-light); border-top: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Upcoming Mega Infrastructure Catalysts</h2>
+        <p>Why land values along the Yamuna Expressway are appreciating at 20%+ CAGR.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
+        <div style="background: var(--color-bg-alt); padding: 30px; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+          <span style="font-size: 2rem;">🚕</span>
+          <h3 style="margin: 15px 0 10px; font-size: 1.3rem;">Pod Taxi Network</h3>
+          <p style="font-size: 0.9rem;">India's first driverless Pod Taxi system will directly connect Noida International Airport with the Sector 21 International Film City site, stopping near key townships.</p>
+        </div>
+
+        <div style="background: var(--color-bg-alt); padding: 30px; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+          <span style="font-size: 2rem;">🏥</span>
+          <h3 style="margin: 15px 0 10px; font-size: 1.3rem;">Medical Device Park</h3>
+          <p style="font-size: 0.9rem;">YEIDA has dedicated 350+ acres for medical device factories, attracting over ₹5,000 crores in MNC investments and creating high industrial employment density.</p>
+        </div>
+
+        <div style="background: var(--color-bg-alt); padding: 30px; border-radius: var(--border-radius-md); border: 1px solid var(--color-border);">
+          <span style="font-size: 2rem;">🏎️</span>
+          <h3 style="margin: 15px 0 10px; font-size: 1.3rem;">Buddh International Circuit</h3>
+          <p style="font-size: 0.9rem;">The landmark Formula 1 racetrack has made the Greater Noida Yamuna Expressway region a national hub for sports, high-profile concerts, and global events.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+            <img src="logo.png" alt="LG Logo" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent); box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+            <div style="display: flex; flex-direction: column;">
+              <span class="logo company-logo-text" style="font-size: 1.3rem; font-weight: 800; line-height: 1.1; color: var(--color-accent);">LAKHA'S GROUP</span>
+              <span class="logo-sub company-logo-sub" style="font-size: 0.55rem; letter-spacing: 2.5px; color: var(--color-text-light); opacity: 0.8;">DEVELOPERS & INVESTMENTS</span>
+            </div>
+          </div>
+          <p>Premium real estate investment consultancies along the high-appreciation Yamuna Expressway and upcoming Noida Airport regions.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-btn social-link-whatsapp" target="_blank" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-instagram" target="_blank" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-facebook" target="_blank" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-linkedin" target="_blank" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-youtube" target="_blank" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="corridor.html">Growth Corridor</a></li>
+            <li><a href="listings.html">Featured Plots</a></li>
+            <li><a href="calculator.html">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="blog.html">Investment Blog</a></li>
+            <li><a href="contact.html">Inquire Land</a></li>
+            <li><a href="contact.html">Sell Your Land</a></li>
+            <li><a href="contact.html">Gaur Yamuna City Details</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h4>Market Reports</h4>
+          <p>Get latest YEIDA circulars and plot values directly in your inbox.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Yamuna Corridor Investment Reports!'); this.reset();">
+            <input type="email" placeholder="Your Email" aria-label="Newsletter Email Input" required>
+            <button type="submit" class="btn btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span class="company-name-text">Lakha's Group</span>. All rights reserved. | GYC & Yamuna Expressway Land Consultants.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 6. WhatsApp Sticky Widget -->
+  <a href="#" class="whatsapp-widget whatsapp-btn-action" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/>
+    </svg>
+  </a>
+
+  <script src="config.js" type="module"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

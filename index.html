@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lakha's Group offers premium residential, commercial, and industrial plots along the Yamuna Expressway corridor between Pari Chowk, Gaur Yamuna City, and upcoming Jewar Airport. Gated community land with 100% verified titles.">
+  <meta name="keywords" content="Yamuna Expressway Plots, Jewar Airport Land, Gaur Yamuna City Plots, YEIDA Plots, Film City Plots, Lakhaa Group, Greater Noida Real Estate">
+  <meta name="author" content="Lakha's Group">
+  
+  <title>Lakha's Group | Premium Plots near Jewar Airport & Yamuna Expressway</title>
+
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="home">
+
+  <!-- 1. Header & Navigation Bar -->
+  <header>
+    <div class="container">
+      <nav class="navbar" id="main-navigation">
+        <a href="index.html" class="logo-container" style="display: flex; align-items: center; gap: 14px;" aria-label="Lakha's Group Logo">
+          <img src="logo.png" alt="LG Logo" style="height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent); box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+          <div style="display: flex; flex-direction: column;">
+            <span class="logo company-logo-text" style="font-size: 1.4rem; font-weight: 800; line-height: 1.1; letter-spacing: 1.5px; color: var(--color-text-light);">LAKHA'S GROUP</span>
+            <span class="logo-sub company-logo-sub" style="font-size: 0.6rem; letter-spacing: 3px; color: var(--color-accent);">DEVELOPERS & INVESTMENTS</span>
+          </div>
+        </a>
+        
+        <ul class="nav-menu" id="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="corridor.html" class="nav-link">Growth Corridor</a></li>
+          <li><a href="listings.html" class="nav-link">Featured Plots</a></li>
+          <li><a href="calculator.html" class="nav-link">ROI Calculator</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a href="tel:+916396143510" class="btn btn-outline phone-contact-number" style="padding: 8px 18px; font-size: 0.85rem;">+91 6396143510</a>
+          <a href="contact.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Book Visit</a>
+        </div>
+
+        <div class="mobile-toggle" id="menu-toggle-btn" aria-label="Toggle Navigation">&#9776;</div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Own Your Plot in India's <span>Golden Future Corridor</span></h1>
+      <p>Invest in premium residential, commercial, and industrial land holdings along the fast-developing Yamuna Expressway—surrounding Gaur Yamuna City, Film City, and Asia's largest running Jewar Airport.</p>
+      <div class="hero-buttons">
+        <a href="listings.html" class="btn btn-primary">Browse Plots</a>
+        <a href="calculator.html" class="btn btn-outline">Calculate Investment ROI</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Search Widget Section (Positioned overlapping the Hero) -->
+  <div class="container" style="margin-top: -60px; padding: 0 20px;">
+    <div class="search-widget" id="plot-search-panel">
+      <form class="search-form" id="home-search-form">
+        <div class="form-group">
+          <label for="search-location">Location</label>
+          <select id="search-location">
+            <option value="all">All Locations</option>
+            <option value="gyc">Gaur Yamuna City</option>
+            <option value="film-city">Near Film City (Sec 21)</option>
+            <option value="jewar">Near Jewar Airport</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="search-type">Plot Zoning</label>
+          <select id="search-type">
+            <option value="all">All Types</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial/Industrial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="search-budget">Budget Limit</label>
+          <select id="search-budget">
+            <option value="all">Any Budget</option>
+            <option value="50l">Under ₹50 Lakhs</option>
+            <option value="1cr">₹50 Lakhs - ₹1.5 Crore</option>
+            <option value="above">Above ₹1.5 Crore</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="search-size">Preferred Size</label>
+          <select id="search-size">
+            <option value="all">Any Size</option>
+            <option value="small">100 - 150 Sq. Yards</option>
+            <option value="med">150 - 300 Sq. Yards</option>
+            <option value="large">Above 300 Sq. Yards</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-dark" style="width: 100%; height: 46px;">Search Plots</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Statistics Tracker -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid" id="stats-grid-container">
+        <!-- Dynamically injected via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Growth Corridor Teaser -->
+  <section class="map-section" style="background-color: var(--color-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Yamuna Expressway Growth Corridor</h2>
+        <p>Analyze key landmarks, logistics hubs, and upcoming world-class infrastructure projects along the 32 KM stretch from Greater Noida to Noida International Airport.</p>
+      </div>
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <p style="font-size: 1.1rem; margin-bottom: 30px;">Explore the upcoming International Film City, Buddh Circuit, Toy Park clusters, and Noida Airport logistics hub using our premium interactive map layout.</p>
+        <a href="corridor.html" class="btn btn-primary">Open Interactive Map</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Featured Plots Preview Grid -->
+  <section class="listings-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Premium Land Opportunities</h2>
+        <p>Explore handpicked, government-approved (YEIDA/RERA), and ready-to-register plots near major development nodes.</p>
+      </div>
+
+      <!-- Listings Grid Preview -->
+      <div class="listings-grid" id="listings-grid-preview">
+        <!-- Dynamically injected top 3 items via app.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="listings.html" class="btn btn-outline">View All Plots</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ROI Appreciation Calculator Teaser -->
+  <section class="calc-section" style="background-color: var(--color-bg-alt); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Real Estate Appreciation Forecast</h2>
+        <p>Estimate the growth potential of your investment based on historical trends, location catalysts, and project development timelines.</p>
+      </div>
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <p style="font-size: 1.1rem; margin-bottom: 30px;">Zoning type, airport milestones, and local infrastructure projects affect compounding appreciation rates. Use our ROI slider forecast module to build your projection.</p>
+        <a href="calculator.html" class="btn btn-primary">Start ROI Calculation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Blog Preview Section -->
+  <section class="blog-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Yamuna Corridor Investment Blog</h2>
+        <p>Read regional analysis reports, RERA guidelines, and YEIDA township news compiled by Lakha's Group specialists.</p>
+      </div>
+      
+      <div class="blog-grid" id="blog-grid-preview">
+        <!-- Dynamic top 2 blogs loaded via app.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="blog.html" class="btn btn-outline">Explore All Articles</a>
+      </div>
+  </section>
+
+  <!-- 8.5. Leadership & Team Section -->
+  <section class="team-section" id="team-showcase" style="background-color: var(--color-bg-alt); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Leadership & Advisory Team</h2>
+        <p>The visionaries and real estate experts guiding your land asset acquisition along the Yamuna Expressway corridor.</p>
+      </div>
+
+      <!-- Founder & Co-Founder (Leaders) Row -->
+      <div class="leaders-row" id="leaders-container">
+        <!-- Dynamically injected via app.js -->
+      </div>
+
+      <!-- Employees / Staff Section (Sideways Scrolling Slider) -->
+      <div class="team-slider-wrapper">
+        <h3 class="slider-title" style="text-align: center; margin-top: 40px; margin-bottom: 25px; font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary);">Our Dedicated Property Consultants</h3>
+        <div class="team-slider" id="team-slider-container">
+          <!-- Dynamically injected via app.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Quick Inquiry Form Section -->
+  <section class="inquiry-section">
+    <div class="container">
+      <div class="inquiry-layout">
+        <!-- Info Column -->
+        <div class="inquiry-info">
+          <h3 class="company-name-text">Lakha's Group</h3>
+          <p>Ready to secure your land asset? Schedule a complimentary private site tour with our expert advisors, including dynamic site mapping and zoning documents briefing.</p>
+          
+          <div class="contact-item">
+            <div class="contact-icon">&#128222;</div>
+            <div>
+              <div style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.6;">Direct Line</div>
+              <a href="tel:+916396143510" class="phone-contact-number" style="font-weight: 700; color: var(--color-accent);">+91 63961 43510</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">&#128205;</div>
+            <div>
+              <div style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.6;">Office Hub</div>
+              <div style="font-weight: 700; font-size: 0.95rem;">Gaur Yamuna City, Gautam Buddha Nagar, UP</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="inquiry-card">
+          <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: var(--color-accent);">Schedule Site Tour</h3>
+          <form id="lead-inquiry-form">
+            <input type="hidden" id="inquiry-req-plot" value="Homepage Quick Form">
+            <div class="form-row">
+              <div class="form-input-group">
+                <label for="inquiry-name">Your Full Name *</label>
+                <input type="text" id="inquiry-name" placeholder="Name" required>
+              </div>
+              <div class="form-input-group">
+                <label for="inquiry-phone">Contact Number *</label>
+                <input type="tel" id="inquiry-phone" placeholder="Phone" required>
+              </div>
+            </div>
+            <div class="form-input-group">
+              <label for="inquiry-email">Email Address</label>
+              <input type="email" id="inquiry-email" placeholder="Email">
+            </div>
+            <div class="form-input-group">
+              <label for="inquiry-purpose">Investment Profile</label>
+              <select id="inquiry-purpose">
+                <option value="invest">Long-term Wealth Building (Investor)</option>
+                <option value="self">Immediate House Construction (End-User)</option>
+                <option value="sell">Looking to Sell My Plot</option>
+              </select>
+            </div>
+            <div class="form-input-group">
+              <label for="inquiry-message">Message</label>
+              <textarea id="inquiry-message" rows="3" placeholder="Briefly specify your requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem; height: 50px;">Request Advisory Session</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+            <img src="logo.png" alt="LG Logo" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent); box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+            <div style="display: flex; flex-direction: column;">
+              <span class="logo company-logo-text" style="font-size: 1.3rem; font-weight: 800; line-height: 1.1; color: var(--color-accent);">LAKHA'S GROUP</span>
+              <span class="logo-sub company-logo-sub" style="font-size: 0.55rem; letter-spacing: 2.5px; color: var(--color-text-light); opacity: 0.8;">DEVELOPERS & INVESTMENTS</span>
+            </div>
+          </div>
+          <p>Premium real estate investment consultancies along the high-appreciation Yamuna Expressway and upcoming Noida Airport regions.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-btn social-link-whatsapp" target="_blank" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-instagram" target="_blank" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-facebook" target="_blank" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-linkedin" target="_blank" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn social-link-youtube" target="_blank" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="corridor.html">Growth Corridor</a></li>
+            <li><a href="listings.html">Featured Plots</a></li>
+            <li><a href="calculator.html">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="blog.html">Investment Blog</a></li>
+            <li><a href="contact.html">Inquire Land</a></li>
+            <li><a href="contact.html">Sell Your Land</a></li>
+            <li><a href="contact.html">Gaur Yamuna City Details</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h4>Market Reports</h4>
+          <p>Get latest YEIDA circulars and plot values directly in your inbox.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Yamuna Corridor Investment Reports!'); this.reset();">
+            <input type="email" placeholder="Your Email" aria-label="Newsletter Email Input" required>
+            <button type="submit" class="btn btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span class="company-name-text">Lakha's Group</span>. All rights reserved. | GYC & Yamuna Expressway Land Consultants.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 11. WhatsApp Sticky Widget -->
+  <a href="#" class="whatsapp-widget whatsapp-btn-action" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/>
+    </svg>
+  </a>
+
+  <!-- Link Configurations and Code -->
+  <script src="config.js" type="module"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
