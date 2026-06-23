@@ -133,6 +133,25 @@ function initializeHomePreview() {
     });
   }
 
+  // Intersection Observer to autoplay/pause video on scroll (prevent sound clash & save resources)
+  if (video && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(err => {
+            console.log("Autoplay prevented by browser:", err);
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.15 // Trigger when at least 15% of the video is visible
+    });
+    
+    observer.observe(video);
+  }
+
   // Statistics Counter
   const statsContainer = document.getElementById("stats-grid-container");
   if (statsContainer) {
