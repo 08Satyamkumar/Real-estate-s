@@ -104,6 +104,35 @@ function initializeMobileMenu() {
    3. HOME PAGE (INDEX.HTML) PREVIEWS
    ======================================================== */
 function initializeHomePreview() {
+  // Hero Video Volume Toggle
+  const video = document.querySelector(".hero-video");
+  const volumeBtn = document.getElementById("hero-volume-toggle");
+  if (video && volumeBtn) {
+    // Start muted (required for browser autoplay policies)
+    video.muted = true;
+    
+    volumeBtn.addEventListener("click", () => {
+      video.muted = !video.muted;
+      if (video.muted) {
+        volumeBtn.classList.remove("unmuted");
+        // Update SVG icon to muted speaker
+        volumeBtn.innerHTML = `
+          <svg class="volume-icon" viewBox="0 0 24 24" width="22" height="22">
+            <path fill="currentColor" d="M3.61 2.27L2.27 3.61 9.26 10.6H6v4h3l5 5v-5.27l4.39 4.39c-.58.44-1.22.8-1.92.98v2.06c1.24-.31 2.37-.9 3.32-1.68l2.63 2.63 1.34-1.34L3.61 2.27zM12 4L9.91 6.09 12 8.18V4zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-3.09-7.86-7.1-8.77v2.06c2.94.95 5.1 3.72 5.1 7z"/>
+          </svg>
+        `;
+      } else {
+        volumeBtn.classList.add("unmuted");
+        // Update SVG icon to unmuted speaker
+        volumeBtn.innerHTML = `
+          <svg class="volume-icon" viewBox="0 0 24 24" width="22" height="22">
+            <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        `;
+      }
+    });
+  }
+
   // Statistics Counter
   const statsContainer = document.getElementById("stats-grid-container");
   if (statsContainer) {
