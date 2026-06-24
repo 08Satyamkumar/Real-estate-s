@@ -234,7 +234,9 @@ function initializeHomePreview() {
       e.preventDefault();
       const loc = document.getElementById("search-location").value;
       const type = document.getElementById("search-type").value;
-      window.location.href = `listings.html?location=${loc}&type=${type}`;
+      const budget = document.getElementById("search-budget").value;
+      const size = document.getElementById("search-size").value;
+      window.location.href = `listings.html?location=${loc}&type=${type}&budget=${budget}&size=${size}`;
     });
   }
 
@@ -359,6 +361,8 @@ function initializeListings() {
   const urlParams = new URLSearchParams(window.location.search);
   const typeFilter = urlParams.get("type") || "all";
   const locationFilter = urlParams.get("location") || "all";
+  const budgetFilter = urlParams.get("budget") || "all";
+  const sizeFilter = urlParams.get("size") || "all";
 
   // Pre-fill filter button states based on URL params
   if (typeFilter !== "all") {
@@ -372,7 +376,7 @@ function initializeListings() {
   }
 
   // Filter and Render
-  filterAndRenderListings(typeFilter, locationFilter);
+  filterAndRenderListings(typeFilter, locationFilter, budgetFilter, sizeFilter);
 
   // Setup click filters
   filterBtns.forEach(btn => {
@@ -380,24 +384,61 @@ function initializeListings() {
       filterBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       const category = btn.getAttribute("data-filter");
-      filterAndRenderListings(category, "all");
+      filterAndRenderListings(category, "all", "all", "all");
     });
   });
 
-  function filterAndRenderListings(category, location) {
+  function filterAndRenderListings(category, location, budget, size) {
     let filtered = RealEstateConfig.listings;
     
+    // 1. Filter by category
     if (category !== "all") {
       filtered = filtered.filter(item => item.type === category);
     }
     
+    // 2. Filter by location
     if (location !== "all") {
-      if (location === "gyc") {
+      const locLower = location.toLowerCase();
+      if (locLower === "gaur-yamuna-city") {
         filtered = filtered.filter(item => item.location.toLowerCase().includes("gaur yamuna"));
-      } else if (location === "film-city") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("film city"));
-      } else if (location === "jewar") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("jewar"));
+      } else if (locLower === "sector-18") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 18"));
+      } else if (locLower === "sector-20-c") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block c"));
+      } else if (locLower === "sector-20-d") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block d"));
+      } else if (locLower === "sector-20-e") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block e"));
+      } else if (locLower === "sector-22-d") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 22") && item.location.toLowerCase().includes("block d"));
+      } else if (locLower === "sector-17") {
+        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 17"));
+      }
+    }
+
+    // 3. Filter by budget
+    if (budget !== "all") {
+      if (budget === "2cr") {
+        filtered = filtered.filter(item => item.priceRaw < 20000000);
+      } else if (budget === "5cr") {
+        filtered = filtered.filter(item => item.priceRaw >= 20000000 && item.priceRaw <= 50000000);
+      } else if (budget === "15cr") {
+        filtered = filtered.filter(item => item.priceRaw >= 50000000 && item.priceRaw <= 150000000);
+      } else if (budget === "above") {
+        filtered = filtered.filter(item => item.priceRaw > 150000000);
+      }
+    }
+
+    // 4. Filter by size (Meter)
+    if (size !== "all") {
+      if (size === "small") {
+        filtered = filtered.filter(item => item.sizeRaw >= 120 && item.sizeRaw <= 200);
+      } else if (size === "medium") {
+        filtered = filtered.filter(item => item.sizeRaw > 200 && item.sizeRaw <= 500);
+      } else if (size === "large") {
+        filtered = filtered.filter(item => item.sizeRaw > 500 && item.sizeRaw <= 1000);
+      } else if (size === "industrial-large") {
+        filtered = filtered.filter(item => item.sizeRaw > 1000 && item.sizeRaw <= 4000);
       }
     }
 
