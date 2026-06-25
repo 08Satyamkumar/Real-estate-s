@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed features, layout specifications, road width, and connectivity highlights of premium plots and properties.">
+  <title>Property Specifications | Lakha's Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Premium Detail Page specific layouts */
+    .detail-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      margin-bottom: 80px;
+    }
+    .detail-gallery {
+      background: var(--color-bg-alt);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-premium);
+      height: 450px;
+      position: relative;
+    }
+    .detail-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .back-btn-wrapper {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      margin-bottom: 35px;
+      box-shadow: var(--shadow-premium);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+    }
+    .spec-table th, .spec-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .spec-table th {
+      background-color: var(--color-primary-light);
+      color: var(--color-text-light);
+      font-weight: 600;
+    }
+    .spec-table tr:nth-child(even) {
+      background-color: var(--color-bg-alt);
+    }
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+    .detail-sidebar-box {
+      background: var(--color-primary);
+      color: var(--color-text-light);
+      padding: 30px;
+      border-radius: var(--border-radius-lg);
+      position: sticky;
+      top: 100px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.15);
+    }
+    .detail-price-tag {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 5px;
+    }
+    .detail-size-tag {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .inquiry-form-box input, .inquiry-form-box textarea, .inquiry-form-box button {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 15px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text-light);
+      outline: none;
+      font-family: var(--font-sans);
+    }
+    .inquiry-form-box input::placeholder, .inquiry-form-box textarea::placeholder {
+      color: #94a3b8;
+    }
+    .inquiry-form-box input:focus, .inquiry-form-box textarea:focus {
+      border-color: var(--color-accent);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .inquiry-form-box button {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .inquiry-form-box button:hover {
+      background: var(--color-accent-hover);
+    }
+    .connectivity-list {
+      list-style: none;
+      margin-top: 15px;
+    }
+    .connectivity-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+    .connectivity-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 992px) {
+      .detail-container {
+        grid-template-columns: 1fr;
+      }
+      .detail-sidebar-box {
+        position: relative;
+        top: 0;
+      }
+      .detail-gallery {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar" id="main-navigation">
+        <a href="index.html" class="logo-container" style="display: flex; align-items: center; gap: 14px;" aria-label="Lakha's Group Logo">
+          <img src="logo.png" alt="LG Logo" style="height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent);">
+          <div style="display: flex; flex-direction: column;">
+            <span class="logo company-logo-text" style="font-size: 1.4rem; font-weight: 800; line-height: 1.1; letter-spacing: 1.5px; color: var(--color-text-light);">LAKHA'S GROUP</span>
+            <span class="logo-sub company-logo-sub" style="font-size: 0.6rem; letter-spacing: 3px; color: var(--color-accent);">DEVELOPERS & INVESTMENTS</span>
+          </div>
+        </a>
+        <ul class="nav-menu" id="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="corridor.html" class="nav-link">Growth Corridor</a></li>
+          <li><a href="listings.html" class="nav-link active">Featured Plots</a></li>
+          <li><a href="calculator.html" class="nav-link">ROI Calculator</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="tel:+916396143510" class="btn btn-outline phone-contact-number">+91 63961 43510</a>
+          <a href="contact.html" class="btn btn-primary">Book Visit</a>
+        </div>
+        <div class="mobile-toggle" id="menu-toggle-btn">&#9776;</div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Content Area -->
+  <div class="subpage-hero" style="padding: 60px 20px;">
+    <h1 id="property-main-title">Loading specifications...</h1>
+    <p id="property-sub-header">Loading region and locations details</p>
+  </div>
+
+  <!-- Detail Page Main Panel -->
+  <main class="container" style="padding: 0 20px;">
+    
+    <div class="back-btn-wrapper">
+      <a href="listings.html" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">← Back to All Listings</a>
+    </div>
+
+    <!-- Error Wrapper -->
+    <div id="error-panel" style="display: none; text-align: center; padding: 100px 20px;">
+      <h2 style="font-size: 2.2rem; margin-bottom: 15px;">Property Not Found</h2>
+      <p style="margin-bottom: 30px;">The plot you are searching for is either sold out or no longer listed on our portals.</p>
+      <a href="listings.html" class="btn btn-primary">Browse Active Holdings</a>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="detail-container" id="main-detail-grid" style="display: none;">
+      
+      <!-- Left Column: Details -->
+      <div class="detail-main-content">
+        <div class="detail-gallery">
+          <img id="property-gallery-img" src="" alt="Property Layout Image">
+        </div>
+
+        <div style="margin-top: 35px;">
+          <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Overview & Location Highlights</h2>
+          <p id="property-description" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px;"></p>
+        </div>
+
+        <!-- Specifications Table -->
+        <div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Layout & Allotment Specifications</h3>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Specification Field</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Allotting Authority</td>
+                <td id="spec-authority">-</td>
+              </tr>
+              <tr>
+                <td>Plot Facing direction</td>
+                <td id="spec-facing">-</td>
+              </tr>
+              <tr>
+                <td>Front Road Width</td>
+                <td id="spec-road-size">-</td>
+              </tr>
+              <tr>
+                <td>RERA Registration No.</td>
+                <td id="spec-rera-no">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Connectivity Section -->
+        <div style="margin-bottom: 40px;">
+          <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Infrastructure & Proximity Advantages</h3>
+          <ul class="connectivity-list" id="property-connectivity-list">
+            <!-- Loaded dynamically -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Sidebar Inquiry Widget -->
+      <div class="detail-sidebar">
+        <div class="detail-sidebar-box">
+          <div class="detail-price-tag" id="sidebar-price">₹0.0 Lakhs</div>
+          <div class="detail-size-tag" id="sidebar-size">0 Sq. Yards</div>
+          
+          <h4 style="font-family: var(--font-sans); font-size: 1.1rem; margin-bottom: 15px; color: var(--color-accent);">BOOK AN ADVISORY VISIT</h4>
+          
+          <form class="inquiry-form-box" id="inquiry-lead-form">
+            <input type="text" placeholder="Your Name" aria-label="Lead Name" required>
+            <input type="tel" placeholder="Mobile Number" aria-label="Lead Phone" required>
+            <textarea placeholder="I am interested in booking a site visit..." aria-label="Lead Message" rows="3" required></textarea>
+            <button type="submit" id="submit-lead-btn">Schedule Free Site Visit</button>
+          </form>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+            <a href="tel:+916396143510" class="btn btn-outline" style="text-align: center; border-color: rgba(255,255,255,0.25); color: white; padding: 10px; font-size: 0.85rem;">Call Agent</a>
+            <a href="#" id="sidebar-whatsapp-btn" target="_blank" class="btn btn-primary" style="text-align: center; background: #25d366; color: white; border: none; padding: 10px; font-size: 0.85rem;">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+            <img src="logo.png" alt="LG Logo" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent);">
+            <div style="display: flex; flex-direction: column;">
+              <span class="logo company-logo-text" style="font-size: 1.3rem; font-weight: 800; line-height: 1.1; color: var(--color-accent);">LAKHA'S GROUP</span>
+              <span class="logo-sub company-logo-sub" style="font-size: 0.55rem; letter-spacing: 2.5px; color: var(--color-text-light); opacity: 0.8;">DEVELOPERS & INVESTMENTS</span>
+            </div>
+          </div>
+          <p>Premium real estate investment consultancies along Noida, Greater Noida, and high-appreciation Yamuna Expressway regions.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="corridor.html">Growth Corridor</a></li>
+            <li><a href="listings.html">Featured Plots</a></li>
+            <li><a href="calculator.html">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="blog.html">Investment Blog</a></li>
+            <li><a href="contact.html">Inquire Land</a></li>
+            <li><a href="contact.html">Sell Your Land</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span class="company-name-text">Lakha's Group</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    // Stands alone dynamic loading script reading parameters
+    document.addEventListener("DOMContentLoaded", () => {
+      // Toggle Mobile Menu
+      const toggleBtn = document.getElementById("menu-toggle-btn");
+      const navLinks = document.getElementById("nav-links");
+      if (toggleBtn && navLinks) {
+        toggleBtn.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+        });
+      }
+
+      // Fetch parameters and listing details
+      const urlParams = new URLSearchParams(window.location.search);
+      const plotId = urlParams.get("id");
+
+      if (!plotId || !window.RealEstateConfig || !window.RealEstateConfig.listings) {
+        document.getElementById("error-panel").style.display = "block";
+        return;
+      }
+
+      const listing = window.RealEstateConfig.listings.find(item => item.id === plotId);
+
+      if (!listing) {
+        document.getElementById("error-panel").style.display = "block";
+        return;
+      }
+
+      // Populate elements
+      document.getElementById("main-detail-grid").style.display = "grid";
+      document.getElementById("property-main-title").innerText = listing.title;
+      
+      const regionText = listing.region === "yeida" ? "YEIDA Corridor" : (listing.region === "noida" ? "Noida Zone" : "Greater Noida Zone");
+      document.getElementById("property-sub-header").innerText = `${regionText} \u2022 ${listing.location}`;
+
+      document.title = `${listing.title} | Lakha's Group`;
+
+      const imgEl = document.getElementById("property-gallery-img");
+      imgEl.src = listing.image;
+      imgEl.alt = listing.title;
+
+      document.getElementById("property-description").innerText = listing.description;
+
+      // Sidebar tags
+      document.getElementById("sidebar-price").innerText = listing.price;
+      document.getElementById("sidebar-size").innerText = listing.size;
+
+      // Table Specifications
+      if (listing.specifications) {
+        document.getElementById("spec-authority").innerText = listing.specifications.authority || "N/A";
+        document.getElementById("spec-facing").innerText = listing.specifications.facing || "N/A";
+        document.getElementById("spec-road-size").innerText = listing.specifications.roadSize || "N/A";
+        document.getElementById("spec-rera-no").innerText = listing.specifications.reraNo || "N/A";
+      }
+
+      // Proximity list
+      const connList = document.getElementById("property-connectivity-list");
+      connList.innerHTML = "";
+      if (listing.connectivity && listing.connectivity.length > 0) {
+        listing.connectivity.forEach(item => {
+          const li = document.createElement("li");
+          li.innerText = item;
+          connList.appendChild(li);
+        });
+      } else {
+        const li = document.createElement("li");
+        li.innerText = "Excellent road access and nearby planned infrastructure corridors.";
+        connList.appendChild(li);
+      }
+
+      // Prefill Whatsapp action link
+      const waBtn = document.getElementById("sidebar-whatsapp-btn");
+      if (waBtn && window.RealEstateConfig.branding && window.RealEstateConfig.branding.whatsapp) {
+        const encodedText = encodeURIComponent(`Hello Lakha's Group, I am interested in booking a site visit or getting layouts for plot: ${listing.title} (${listing.location})`);
+        waBtn.href = `${window.RealEstateConfig.branding.whatsapp}&text=${encodedText}`;
+      }
+
+      // inquiry form submit
+      const leadForm = document.getElementById("inquiry-lead-form");
+      if (leadForm) {
+        leadForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(`Thank you for your interest! Your site visit request for "${listing.title}" has been received. Our advisors will contact you shortly.`);
+          leadForm.reset();
+        });
+      }
+
+      // Apply branding parameters dynamically if config exists
+      const config = window.RealEstateConfig;
+      if (config && config.branding) {
+        const phoneNoTextElements = document.querySelectorAll(".phone-contact-number");
+        phoneNoTextElements.forEach(el => {
+          el.innerText = config.branding.phone;
+          el.href = `tel:${config.branding.phone.replace(/\s+/g, '')}`;
+        });
+      }
+    });
+  </script>
+</body>
+</html>

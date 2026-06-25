@@ -353,70 +353,65 @@ function initializeInteractiveMap() {
    5. PROPERTY LISTINGS PAGE (LISTINGS.HTML)
    ======================================================== */
 function initializeListings() {
-  const listingsGrid = document.getElementById("listings-grid");
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  if (!listingsGrid) return;
+  const containerWrapper = document.getElementById("listings-container-wrapper");
+  const regionBtns = document.querySelectorAll(".region-btn");
+  if (!containerWrapper) return;
 
   // Check URL parameters for search redirects from homepage
   const urlParams = new URLSearchParams(window.location.search);
-  const typeFilter = urlParams.get("type") || "all";
   const locationFilter = urlParams.get("location") || "all";
   const budgetFilter = urlParams.get("budget") || "all";
   const sizeFilter = urlParams.get("size") || "all";
 
-  // Pre-fill filter button states based on URL params
-  if (typeFilter !== "all") {
-    filterBtns.forEach(btn => {
-      if (btn.getAttribute("data-filter") === typeFilter) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
+  // Determine active region based on location filter or default to 'noida'
+  let activeRegion = "noida";
+  if (locationFilter !== "all") {
+    // Detect region from matching location
+    const matchedPlot = RealEstateConfig.listings.find(item => 
+      item.id.includes(locationFilter) || 
+      item.location.toLowerCase().includes(locationFilter.replace(/-/g, " "))
+    );
+    if (matchedPlot) {
+      activeRegion = matchedPlot.region;
+    }
   }
 
-  // Filter and Render
-  filterAndRenderListings(typeFilter, locationFilter, budgetFilter, sizeFilter);
-
-  // Setup click filters
-  filterBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach(b => b.classList.remove("active"));
+  // Pre-fill active region tab
+  regionBtns.forEach(btn => {
+    if (btn.getAttribute("data-region") === activeRegion) {
       btn.classList.add("active");
-      const category = btn.getAttribute("data-filter");
-      filterAndRenderListings(category, "all", "all", "all");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+
+  // Render initial list
+  filterAndRenderListingsByRegion(activeRegion, locationFilter, budgetFilter, sizeFilter);
+
+  // Setup click listeners for region switch tabs
+  regionBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      regionBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeRegion = btn.getAttribute("data-region");
+      // Reset sector/location filter when manually switching tabs
+      filterAndRenderListingsByRegion(activeRegion, "all", budgetFilter, sizeFilter);
     });
   });
 
-  function filterAndRenderListings(category, location, budget, size) {
-    let filtered = RealEstateConfig.listings;
+  function filterAndRenderListingsByRegion(region, location, budget, size) {
+    let filtered = RealEstateConfig.listings.filter(item => item.region === region);
     
-    // 1. Filter by category
-    if (category !== "all") {
-      filtered = filtered.filter(item => item.type === category);
-    }
-    
-    // 2. Filter by location
+    // 1. Filter by location (sector)
     if (location !== "all") {
-      const locLower = location.toLowerCase();
-      if (locLower === "gaur-yamuna-city") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("gaur yamuna"));
-      } else if (locLower === "sector-18") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 18"));
-      } else if (locLower === "sector-20-c") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block c"));
-      } else if (locLower === "sector-20-d") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block d"));
-      } else if (locLower === "sector-20-e") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 20") && item.location.toLowerCase().includes("block e"));
-      } else if (locLower === "sector-22-d") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 22") && item.location.toLowerCase().includes("block d"));
-      } else if (locLower === "sector-17") {
-        filtered = filtered.filter(item => item.location.toLowerCase().includes("sector 17"));
-      }
+      const locLower = location.toLowerCase().replace(/-/g, " ");
+      filtered = filtered.filter(item => 
+        item.location.toLowerCase().includes(locLower) || 
+        item.id.toLowerCase().includes(location.toLowerCase())
+      );
     }
-
-    // 3. Filter by budget
+    
+    // 2. Filter by budget
     if (budget !== "all") {
       if (budget === "2cr") {
         filtered = filtered.filter(item => item.priceRaw < 20000000);
@@ -429,7 +424,7 @@ function initializeListings() {
       }
     }
 
-    // 4. Filter by size (Meter)
+    // 3. Filter by size
     if (size !== "all") {
       if (size === "small") {
         filtered = filtered.filter(item => item.sizeRaw >= 120 && item.sizeRaw <= 200);
@@ -438,60 +433,94 @@ function initializeListings() {
       } else if (size === "large") {
         filtered = filtered.filter(item => item.sizeRaw > 500 && item.sizeRaw <= 1000);
       } else if (size === "industrial-large") {
-        filtered = filtered.filter(item => item.sizeRaw > 1000 && item.sizeRaw <= 4000);
+        filtered = filtered.filter(item => item.sizeRaw > 1000 && item.sizeRaw <= 8000);
       }
     }
 
-    renderListingGrid(filtered);
-  }
-}
-
-function renderListingGrid(items) {
-  const listingsGrid = document.getElementById("listings-grid");
-  if (!listingsGrid) return;
-
-  if (items.length === 0) {
-    listingsGrid.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px;">
-        <h3 style="color: var(--color-primary); font-size:1.8rem;">No Matching Plots Found</h3>
-        <p style="margin-top:10px;">Contact us directly. We have verified off-market land holdings in this exact sector.</p>
-        <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Contact Advisors</a>
-      </div>
-    `;
-    return;
+    renderGroupedListings(filtered);
   }
 
-  listingsGrid.innerHTML = "";
-  items.forEach(listing => {
-    const card = document.createElement("div");
-    card.className = "listing-card";
-    let badgeClass = listing.status === "Reserved" ? "badge-reserved" : (listing.status === "Sold Out" ? "badge-sold" : "badge-available");
-    const tagsMarkup = listing.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+  function renderGroupedListings(items) {
+    containerWrapper.innerHTML = "";
 
-    card.innerHTML = `
-      <div class="listing-image-wrapper">
-        <span class="listing-badge ${badgeClass}">${listing.status}</span>
-        <img src="${listing.image}" alt="${listing.title}">
-      </div>
-      <div class="listing-info">
-        <div class="listing-price-row">
-          <span class="listing-price">${listing.price}</span>
-          <span class="listing-size">${listing.size}</span>
+    if (items.length === 0) {
+      containerWrapper.innerHTML = `
+        <div style="text-align: center; padding: 80px 20px;">
+          <h3 style="color: var(--color-primary); font-size:1.8rem;">No Matching Plots Found</h3>
+          <p style="margin-top:10px;">Contact us directly. We have verified off-market holdings in this region.</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Contact Advisors</a>
         </div>
-        <h3 class="listing-title">${listing.title}</h3>
-        <div class="listing-location">
-          <span>&#128205;</span> ${listing.location}
-        </div>
-        <p class="listing-desc">${listing.description}</p>
-        <div class="listing-tags">${tagsMarkup}</div>
-        <div class="listing-cta">
-          <a href="contact.html?plot=${encodeURIComponent(listing.title)}" class="btn btn-dark">Book Visit</a>
-          <a href="${RealEstateConfig.branding.whatsapp}&text=Hi,%20I%20am%20interested%20in%20listing:%20${encodeURIComponent(listing.title)}" target="_blank" class="btn btn-outline">WhatsApp</a>
-        </div>
-      </div>
-    `;
-    listingsGrid.appendChild(card);
-  });
+      `;
+      return;
+    }
+
+    // Group items by category
+    const categoriesMap = {
+      "residential-plot": "Residential Plots",
+      "flat-studio": "Flats & Studio Apartments",
+      "commercial": "Commercial & Retail Spaces",
+      "industrial": "Industrial Plots",
+      "farmhouse": "Luxury Farmhouses"
+    };
+
+    const grouped = {};
+    items.forEach(listing => {
+      const cat = listing.category || "residential-plot";
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(listing);
+    });
+
+    // Render grouped carousels
+    Object.keys(categoriesMap).forEach(catKey => {
+      const list = grouped[catKey];
+      if (!list || list.length === 0) return;
+
+      const section = document.createElement("div");
+      section.className = "category-section";
+
+      const title = document.createElement("h2");
+      title.className = "category-section-title";
+      title.innerText = categoriesMap[catKey];
+      section.appendChild(title);
+
+      const carousel = document.createElement("div");
+      carousel.className = "carousel-wrapper";
+
+      list.forEach(listing => {
+        const card = document.createElement("div");
+        card.className = "listing-card";
+        let badgeClass = listing.status === "Reserved" ? "badge-reserved" : (listing.status === "Sold Out" ? "badge-sold" : "badge-available");
+        const tagsMarkup = listing.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+
+        card.innerHTML = `
+          <div class="listing-image-wrapper">
+            <span class="listing-badge ${badgeClass}">${listing.status}</span>
+            <img src="${listing.image}" alt="${listing.title}">
+          </div>
+          <div class="listing-info">
+            <div class="listing-price-row">
+              <span class="listing-price">${listing.price}</span>
+              <span class="listing-size">${listing.size}</span>
+            </div>
+            <h3 class="listing-title">${listing.title}</h3>
+            <div class="listing-location">
+              <span>&#128205;</span> ${listing.location}
+            </div>
+            <p class="listing-desc">${listing.description.substring(0, 100)}...</p>
+            <div class="listing-tags">${tagsMarkup}</div>
+            <div class="listing-cta" style="display:flex; gap:10px; margin-top:15px;">
+              <a href="listing-detail.html?id=${listing.id}" class="btn btn-dark" style="flex:1; text-align:center;">View Details</a>
+              <a href="${RealEstateConfig.branding.whatsapp}&text=Hi,%20I%20am%20interested%20in%20listing:%20${encodeURIComponent(listing.title)}" target="_blank" class="btn btn-outline" style="flex:1; text-align:center;">WhatsApp</a>
+            </div>
+          </div>
+        `;
+        carousel.appendChild(card);
+      });
+
+      section.appendChild(carousel);
+      containerWrapper.appendChild(section);
+    });
+  }
 }
 
 /* ========================================================

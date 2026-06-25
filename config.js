@@ -66,116 +66,316 @@ const RealEstateConfig = {
   // Plot Listings
   listings: [
     {
-      id: "yamuna-res-120",
-      title: "Premium 120 Meter Residential Plot",
-      price: "₹1.2 Crore",
-      priceRaw: 12000000,
-      size: "120 Meter",
-      sizeRaw: 120,
-      location: "Gaur Yamuna City, Yamuna Expressway",
-      type: "residential",
+      id: "noida-farm-150",
+      title: "Luxury 2 Acre Farmhouse Plot",
+      price: "₹8.5 Crore",
+      priceRaw: 85000000,
+      size: "2 Acre",
+      sizeRaw: 8000,
+      location: "Sector 150, Noida",
+      region: "noida",
+      category: "farmhouse",
       status: "Available",
-      description: "Ready-to-register gated-community plot in Gaur Yamuna City with wide internal roads, basic utilities connected, and 24/7 security.",
-      tags: ["GYC Approved", "Registry Ready", "Gated Township"],
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80"
+      description: "Super luxury green farmhouse land parcel located in Sector 150, Noida. Located in the lowest density sector, surrounded by premium golf courses, sports hubs, and excellent connectivity to Noida Expressway.",
+      tags: ["Noida Authority", "Golf Course Facing", "24/7 Security"],
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "North-East Corner",
+        roadSize: "45 Meter",
+        authority: "Noida Authority",
+        reraNo: "Not Applicable (Freehold/Authority Mutated)"
+      },
+      connectivity: [
+        "2 mins from Noida-Greater Noida Expressway",
+        "5 mins from Sector 148 Metro Station",
+        "Direct access to upcoming Yamuna Expressway link"
+      ]
     },
     {
-      id: "yamuna-res-160",
-      title: "160 Meter Residential Plot",
-      price: "₹1.6 Crore",
-      priceRaw: 16000000,
-      size: "160 Meter",
-      sizeRaw: 160,
-      location: "Sector 18, Yamuna Expressway",
-      type: "residential",
-      status: "Available",
-      description: "Excellent residential land parcel in YEIDA Sector 18. Located close to upcoming metro path and parks, ideal for independent villa construction.",
-      tags: ["YEIDA Authority Plot", "Near Metro Corridor", "Immediate Possession"],
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "yamuna-res-200",
-      title: "200 Meter Premium Corner Plot",
-      price: "₹2.0 Crore",
-      priceRaw: 20000000,
+      id: "noida-res-146",
+      title: "200 Meter Premium Residential Plot",
+      price: "₹2.2 Crore",
+      priceRaw: 22000000,
       size: "200 Meter",
       sizeRaw: 200,
-      location: "Sector 20, Block C, Yamuna Expressway",
-      type: "residential",
+      location: "Sector 146, Noida",
+      region: "noida",
+      category: "residential-plot",
       status: "Available",
-      description: "Corner residential plot in Sector 20, Block C. Directly facing wide green belt, fully developed sector with electricity grids and parks.",
-      tags: ["Corner Plot", "Block C", "Registry Done", "Ready to Build"],
-      image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=600&q=80"
+      description: "Premium residential plot in Noida Sector 146. A highly developing sector next to the metro station. Fully gated compound infrastructure with water, electricity grid connections, and parks.",
+      tags: ["Near Metro Station", "Gated Security", "Registry Ready"],
+      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "East",
+        roadSize: "18 Meter",
+        authority: "Noida Authority",
+        reraNo: "RERA Mutated"
+      },
+      connectivity: [
+        "Walking distance from Sector 146 Metro Station",
+        "5 mins from Sector 150 Sports City",
+        "Connected to Noida Expressway via internal 45m road"
+      ]
     },
     {
-      id: "yamuna-res-300",
-      title: "300 Meter Residential Plot",
+      id: "noida-comm-135",
+      title: "Grade-A Commercial Office Space",
+      price: "₹95 Lakhs",
+      priceRaw: 9500000,
+      size: "100 Meter",
+      sizeRaw: 100,
+      location: "Noida West, Sector 135",
+      region: "noida",
+      category: "commercial",
+      status: "Available",
+      description: "Fully furnished corporate office space in Sector 135 corporate hub. High rental yield potential with premium IT MNCs operational nearby. Modern central air-conditioning, high-speed lifts, and power backup.",
+      tags: ["IT Hub Zone", "MNC Occupied", "High Rental Yield"],
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "North-West",
+        roadSize: "30 Meter",
+        authority: "Noida Authority",
+        reraNo: "UPRERAPRJ9856"
+      },
+      connectivity: [
+        "Directly on Noida West Sector 135 Arterial Road",
+        "Adjacent to major IT SEZ (Accenture, Metlife)",
+        "10 mins drive from Noida City Center"
+      ]
+    },
+    {
+      id: "grnoida-res-swarn",
+      title: "160 Meter Freehold Residential Plot",
+      price: "₹1.8 Crore",
+      priceRaw: 18000000,
+      size: "160 Meter",
+      sizeRaw: 160,
+      location: "Swarn Nagri, Greater Noida",
+      region: "greater-noida",
+      category: "residential-plot",
+      status: "Available",
+      description: "Clear-title freehold residential plot in the VIP Sector Swarn Nagri, Greater Noida. The sector boasts mature greenery, active residential community, wide metalled roads, and nearby club facilities.",
+      tags: ["Freehold Plot", "VIP Sector", "Mature Gated Community"],
+      image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "South-East",
+        roadSize: "12 Meter",
+        authority: "Greater Noida Authority",
+        reraNo: "Not Applicable"
+      },
+      connectivity: [
+        "5 mins from Pari Chowk",
+        "Close to Grand Venice Mall & commercial centers",
+        "Directly connected to GN Expressway"
+      ]
+    },
+    {
+      id: "grnoida-flat-delta",
+      title: "3 BHK Premium Apartment - Delta 3",
+      price: "₹1.2 Crore",
+      priceRaw: 12000000,
+      size: "150 Meter",
+      sizeRaw: 150,
+      location: "Sector Delta 3, Greater Noida",
+      region: "greater-noida",
+      category: "flat-studio",
+      status: "Available",
+      description: "Spacious 3 Bedroom luxury apartment located in Delta 3, Greater Noida. Fully finished modular kitchen, double balconies facing internal green lawns, swimming pool, club house, and reserved basement parking.",
+      tags: ["3 BHK Ready", "Club House", "Authority Mutated"],
+      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "Park Facing North",
+        roadSize: "24 Meter",
+        authority: "Greater Noida Authority",
+        reraNo: "UPRERAPRJ4521"
+      },
+      connectivity: [
+        "2 mins from Delta Metro Station",
+        "Close to local sector markets and schools",
+        "10 mins drive to Knowledge Park universities"
+      ]
+    },
+    {
+      id: "grnoida-comm-kp3",
+      title: "Commercial Studio Shop / Apartment",
+      price: "₹55 Lakhs",
+      priceRaw: 5500000,
+      size: "60 Meter",
+      sizeRaw: 60,
+      location: "Knowledge Park 3, Greater Noida",
+      region: "greater-noida",
+      category: "commercial",
+      status: "Available",
+      description: "Multi-utility studio shop and service suite in Knowledge Park 3. Excellent location with active footfall from adjoining universities (Sharda, Galgotias). Perfect for student rentals, food outlets, or offices.",
+      tags: ["Student Hub", "High Footfall", "Rental Ready"],
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "Main Road Facing",
+        roadSize: "30 Meter",
+        authority: "Greater Noida Authority",
+        reraNo: "RERA Registered"
+      },
+      connectivity: [
+        "Opposite Knowledge Park Metro Station",
+        "Surrounded by 15+ major college complexes",
+        "5 mins from Pari Chowk Commercial District"
+      ]
+    },
+    {
+      id: "yeida-res-18",
+      title: "120 Meter Authority Plot - Sector 18",
+      price: "₹1.5 Crore",
+      priceRaw: 15000000,
+      size: "120 Meter",
+      sizeRaw: 120,
+      location: "Sector 18, Yamuna Expressway",
+      region: "yeida",
+      category: "residential-plot",
+      status: "Available",
+      description: "YEIDA Authority allotted residential plot in Sector 18. Located along the high-growth corridor of Yamuna Expressway. Sector fully planned with parks, metro connectivity, sewage grids, and wide roads.",
+      tags: ["YEIDA Allotted", "100% Registry Done", "Near Noida Airport"],
+      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "North",
+        roadSize: "12 Meter",
+        authority: "YEIDA (Yamuna Expressway Authority)",
+        reraNo: "YEIDA Allotted"
+      },
+      connectivity: [
+        "10 mins drive to Noida International Airport (Jewar)",
+        "5 mins from YEIDA Film City Corridor",
+        "Direct flyover access to Yamuna Expressway"
+      ]
+    },
+    {
+      id: "yeida-res-20",
+      title: "300 Meter VIP Plot - Sector 20",
       price: "₹3.0 Crore",
       priceRaw: 30000000,
       size: "300 Meter",
       sizeRaw: 300,
       location: "Sector 20, Block D, Yamuna Expressway",
-      type: "residential",
+      region: "yeida",
+      category: "residential-plot",
       status: "Available",
-      description: "Vastu-compliant residential plot in the highly preferred Block D of Sector 20. Peaceful neighborhood with operational water and sewage systems.",
-      tags: ["Block D", "Authority Plot", "Vastu Compliant"],
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+      description: "Premium VIP Sector 20, Block D residential plot. Corner layout with park facing view. Ready for immediate boundary wall construction, electricity connection, and registry mutation.",
+      tags: ["VIP Block D", "Park Facing", "Immediate Mutation"],
+      image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "North-East Corner",
+        roadSize: "24 Meter",
+        authority: "YEIDA (Yamuna Expressway Authority)",
+        reraNo: "YEIDA Allotted"
+      },
+      connectivity: [
+        "10 mins from Noida International Airport",
+        "Connected via 24m wide sector road",
+        "Near proposed Pod Taxi terminal station"
+      ]
     },
     {
-      id: "yamuna-res-500",
-      title: "500 Meter Premium Villa Plot",
-      price: "₹5.0 Crore",
-      priceRaw: 50000000,
-      size: "500 Meter",
-      sizeRaw: 500,
-      location: "Sector 20, Block E, Yamuna Expressway",
-      type: "residential",
+      id: "yeida-ind-33",
+      title: "300 Meter Toy Park Industrial Plot",
+      price: "₹1.8 Crore",
+      priceRaw: 18000000,
+      size: "300 Meter",
+      sizeRaw: 300,
+      location: "Sector 33, Yamuna Expressway",
+      region: "yeida",
+      category: "industrial",
+      status: "Available",
+      description: "Prime industrial land parcel in YEIDA Sector 33 Manufacturing and Toy Park Cluster. Heavy vehicular access roads, 3-phase electricity grids, dedicated industrial water lines, and effluent treatment links.",
+      tags: ["Industrial Zoning", "Toy Park Cluster", "3-Phase Power ready"],
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "Wide Road Facing",
+        roadSize: "30 Meter",
+        authority: "YEIDA Authority",
+        reraNo: "Industrial Allotted"
+      },
+      connectivity: [
+        "Direct access to Cargo Terminal Noida Airport",
+        "Adjacent to Eastern Peripheral Expressway link",
+        "Excellent logistics connection to Delhi-NCR"
+      ]
+    },
+    {
+      id: "yeida-flat-gaur",
+      title: "Gaur Yamuna City Luxury Apartment",
+      price: "₹85 Lakhs",
+      priceRaw: 8500000,
+      size: "135 Meter",
+      sizeRaw: 135,
+      location: "Gaur Yamuna City, Yamuna Expressway",
+      region: "yeida",
+      category: "flat-studio",
+      status: "Available",
+      description: "Premium high-rise apartment inside the 250-Acre integrated township of Gaur Yamuna City. Excellent township features like a massive Yamuna Lake, active multi-speciality hospital, school, and shopping arcades.",
+      tags: ["BY GAUR", "Gaur Yamuna City", "Yamuna Lake View"],
+      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "Lake Facing",
+        roadSize: "30 Meter",
+        authority: "YEIDA Mutated Gated",
+        reraNo: "UPRERAPRJ8875"
+      },
+      connectivity: [
+        "Direct access on Yamuna Expressway (18 KM Milestone)",
+        "Inside secure fully developed gated township",
+        "15 mins drive to Jewar Airport"
+      ]
+    },
+    {
+      id: "yeida-flat-ats",
+      title: "ATS Allure Premium Apartment",
+      price: "₹90 Lakhs",
+      priceRaw: 9000000,
+      size: "140 Meter",
+      sizeRaw: 140,
+      location: "Sector 22D, Yamuna Expressway",
+      region: "yeida",
+      category: "flat-studio",
       status: "Reserved",
-      description: "Large 500 Meter land parcel located in Sector 20, Block E. Very close to the proposed Pod Taxi line and the Noida International Airport gateway.",
-      tags: ["Block E", "Near Pod Taxi Route", "Large Frontage"],
-      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80"
+      description: "ATS Allure signature luxury apartment in Sector 22D. Known for high building construction standards, green layout density, and clubhouse facilities. Ready to move unit with wooden flooring, premium fittings.",
+      tags: ["BY ATS", "Sector 22D VIP", "Ready to Move"],
+      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "East Park Facing",
+        roadSize: "24 Meter",
+        authority: "YEIDA Approved Layout",
+        reraNo: "UPRERAPRJ11420"
+      },
+      connectivity: [
+        "Opposite upcoming Formula 1 Buddh Circuit area",
+        "12 mins drive to Noida International Airport",
+        "Direct service lane access on Expressway"
+      ]
     },
     {
-      id: "yamuna-res-1000",
-      title: "1000 Meter Super Premium Plot",
-      price: "₹10.0 Crore",
-      priceRaw: 100000000,
-      size: "1000 Meter",
-      sizeRaw: 1000,
-      location: "Sector 22, Block D, Yamuna Expressway",
-      type: "residential",
+      id: "yeida-comm-19",
+      title: "Retail Shop - Sector 19 Commercial Complex",
+      price: "₹75 Lakhs",
+      priceRaw: 7500000,
+      size: "50 Meter",
+      sizeRaw: 50,
+      location: "Sector 19, Yamuna Expressway",
+      region: "yeida",
+      category: "commercial",
       status: "Available",
-      description: "Expansive 1000 Meter plot in Sector 22, Block D. Ideal for a luxury estate or multi-family residential development. Top-tier location along the expressway corridor.",
-      tags: ["Block D (Sec 22)", "Luxury Estate", "Dual Road Frontage"],
-      image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "yamuna-res-2000",
-      title: "2000 Meter Premium Estate Plot",
-      price: "₹18.0 Crore",
-      priceRaw: 180000000,
-      size: "2000 Meter",
-      sizeRaw: 2000,
-      location: "Sector 17, Yamuna Expressway",
-      type: "residential",
-      status: "Available",
-      description: "Spectacular 2000 Meter estate plot in Sector 17, very close to the Yamuna Expressway high-speed exit. Perfectly clear legal title with verified registry mutation.",
-      tags: ["Sector 17", "Gated Compound Option", "Clear Title Guarantee"],
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "yamuna-res-4000",
-      title: "4000 Meter Mega Residential Mansion Plot",
-      price: "₹30.0 Crore",
-      priceRaw: 300000000,
-      size: "4000 Meter",
-      sizeRaw: 4000,
-      location: "Sector VIP, Yamuna Expressway VIP Zone",
-      type: "residential",
-      status: "Available",
-      description: "Ultra-luxury 4000 Meter mansion land parcel in the prime VIP sector of Yamuna Expressway. Maximum size available with 24m wide front road, park facing, and RERA verified.",
-      tags: ["VIP Zone", "4000 Meter", "RERA Approved", "High Appreciation"],
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+      description: "Premium retail corner shop in Sector 19 local commercial complex. High visibility layout, ideal for pharmacy, grocery shops, service offices, or dining spaces. Active daily footfalls from adjacent housing towers.",
+      tags: ["Corner Retail Shop", "Sector 19 Complex", "Double Height Ceiling"],
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+      specifications: {
+        facing: "North Corridor Corner",
+        roadSize: "30 Meter",
+        authority: "YEIDA Approved Complex",
+        reraNo: "Commercial Registered"
+      },
+      connectivity: [
+        "Directly next to Sector 19 residential housing gate",
+        "5 mins from Yamuna Expressway link road",
+        "10 mins to upcoming YEIDA Film City"
+      ]
     }
   ],
 
