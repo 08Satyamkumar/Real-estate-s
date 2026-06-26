@@ -506,6 +506,62 @@ const RealEstateConfig = {
         others: ["Gaur", "ACE", "ATS", "OASIS"]
       }
     }
+  },
+
+  // Custom Commercial Details from user images
+  commercialDetails: {
+    flat: {
+      noida: {
+        priceRange: "₹80K to ₹1.2 Lakh per Sq.m",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹80K to ₹1.2 Lakh per Sq.m",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹80K to ₹1.2 Lakh per Sq.m",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    },
+    plot: {
+      noida: {
+        priceRange: "₹1 Lakh to ₹2 Lakh per Sq.m",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹1 Lakh to ₹2 Lakh per Sq.m",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹80K to ₹1.2 Lakh per Sq.m",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    }
+  },
+
+  // Custom Industrial Details from user images
+  industrialDetails: {
+    plot: {
+      noida: {
+        priceRange: "₹8K to ₹1.5 Lakh per Sq.m",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹80K to ₹1.5 Lakh per Sq.m",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹5K to ₹7 Lakh per Sq.m",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    }
   }
 };
 

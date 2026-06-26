@@ -366,6 +366,7 @@ function initializeListings() {
   let activeSub = "plot";
   let activeSearchText = "";
   let activePrice = "all";
+  let isEditModeActive = false;
 
   // Simple string hash helper to assign deterministic mock values
   function getHashCode(str) {
@@ -376,8 +377,8 @@ function initializeListings() {
     return hash;
   }
 
-  // Pick deterministic image URLs for plots and flats
-  function getPropertyImage(sector, type, index) {
+  // Pick deterministic image URLs for plots, flats, commercial, and industrial properties
+  function getPropertyImage(sector, type, index, category) {
     const plotImages = [
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",
@@ -392,39 +393,109 @@ function initializeListings() {
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
     ];
+    const commercialImages = [
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+    ];
+    const industrialImages = [
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1535557142533-b5e1cc6e2a5d?auto=format&fit=crop&w=600&q=80"
+    ];
     
-    const list = type === "plot" ? plotImages : flatImages;
+    let list = type === "plot" ? plotImages : flatImages;
+    if (category === "commercial") {
+      list = commercialImages;
+    } else if (category === "industrial") {
+      list = industrialImages;
+    }
     const hash = Math.abs(getHashCode(sector + index));
     return list[hash % list.length];
   }
 
-  // Map deterministic prices within location boundaries
-  function getMockPrice(sector, type, region) {
+  // Map deterministic prices based on category, type, and region
+  function getMockPrice(sector, type, region, category) {
     const hash = Math.abs(getHashCode(sector));
-    if (type === "plot") {
-      if (region === "yeida") {
-        // Range: 1L to 1.8L per Sq.m
-        const prices = [1.1, 1.25, 1.45, 1.6, 1.75];
-        const val = prices[hash % prices.length];
-        return { text: `₹${val} Lakh / Sq.m`, val: val * 100000 };
+    
+    if (category === "residential") {
+      if (type === "plot") {
+        if (region === "yeida") {
+          // Range: 1L to 1.8L per Sq.m
+          const prices = [1.1, 1.25, 1.45, 1.6, 1.75];
+          const val = prices[hash % prices.length];
+          return { text: `₹${val} Lakh / Sq.m`, val: val * 100000 };
+        } else {
+          // Noida & Greater Noida Range: 1L to 2L per Sq.m
+          const prices = [1.15, 1.3, 1.55, 1.7, 1.85, 1.95];
+          const val = prices[hash % prices.length];
+          return { text: `₹${val} Lakh / Sq.m`, val: val * 100000 };
+        }
       } else {
-        // Noida & Greater Noida Range: 1L to 2L per Sq.m
-        const prices = [1.15, 1.3, 1.55, 1.7, 1.85, 1.95];
-        const val = prices[hash % prices.length];
-        return { text: `₹${val} Lakh / Sq.m`, val: val * 100000 };
+        // Flats Range: 60 Lakh to 10 Crore
+        const prices = [
+          { text: "₹75 Lakh", val: 7500000 },
+          { text: "₹1.4 Crore", val: 14000000 },
+          { text: "₹2.2 Crore", val: 22000000 },
+          { text: "₹3.8 Crore", val: 38000000 },
+          { text: "₹5.5 Crore", val: 55000000 },
+          { text: "₹9.2 Crore", val: 92000000 }
+        ];
+        return prices[hash % prices.length];
       }
-    } else {
-      // Flats Range: 60 Lakh to 10 Crore
-      const prices = [
-        { text: "₹75 Lakh", val: 7500000 },
-        { text: "₹1.4 Crore", val: 14000000 },
-        { text: "₹2.2 Crore", val: 22000000 },
-        { text: "₹3.8 Crore", val: 38000000 },
-        { text: "₹5.5 Crore", val: 55000000 },
-        { text: "₹9.2 Crore", val: 92000000 }
-      ];
-      return prices[hash % prices.length];
+    } else if (category === "commercial") {
+      if (type === "plot") {
+        if (region === "yeida") {
+          // Range: 80K to 1.2L per Sq.m
+          const prices = [82, 90, 98, 105, 115];
+          const val = prices[hash % prices.length];
+          return { text: `₹${val}K / Sq.m`, val: val * 1000 };
+        } else {
+          // Noida & Greater Noida Range: 1L to 2L per Sq.m
+          const prices = [1.1, 1.25, 1.4, 1.65, 1.8, 1.95];
+          const val = prices[hash % prices.length];
+          return { text: `₹${val} Lakh / Sq.m`, val: val * 100000 };
+        }
+      } else {
+        // Commercial Flats: 80K to 1.2 Lakh per Sq.m
+        const prices = [82, 90, 98, 105, 115];
+        const val = prices[hash % prices.length];
+        return { text: `₹${val}K / Sq.m`, val: val * 1000 };
+      }
+    } else if (category === "industrial") {
+      // Industrial is plot-only
+      if (region === "noida") {
+        // Range: 8K to 1.5 Lakh per Sq.m
+        const prices = [
+          { text: "₹12K / Sq.m", val: 12000 },
+          { text: "₹25K / Sq.m", val: 25000 },
+          { text: "₹48K / Sq.m", val: 48000 },
+          { text: "₹75K / Sq.m", val: 75000 },
+          { text: "₹1.1 Lakh / Sq.m", val: 110000 },
+          { text: "₹1.35 Lakh / Sq.m", val: 135000 }
+        ];
+        return prices[hash % prices.length];
+      } else if (region === "greaterNoida") {
+        // Range: 80K to 1.5 Lakh per Sq.m
+        const prices = [85, 95, 108, 118, 130, 145];
+        const val = prices[hash % prices.length];
+        return { text: `₹${val}K / Sq.m`, val: val * 1000 };
+      } else if (region === "yeida") {
+        // Range: 5K to 7 Lakh per Sq.m
+        const prices = [
+          { text: "₹8K / Sq.m", val: 8000 },
+          { text: "₹22K / Sq.m", val: 22000 },
+          { text: "₹65K / Sq.m", val: 65000 },
+          { text: "₹1.2 Lakh / Sq.m", val: 120000 },
+          { text: "₹2.8 Lakh / Sq.m", val: 280000 },
+          { text: "₹4.5 Lakh / Sq.m", val: 450000 },
+          { text: "₹6.2 Lakh / Sq.m", val: 620000 }
+        ];
+        return prices[hash % prices.length];
+      }
     }
+    return { text: "Contact for Price", val: 0 };
   }
 
   // Setup top-level category tabs
@@ -434,10 +505,13 @@ function initializeListings() {
       btn.classList.add("active");
       activeCategory = btn.getAttribute("data-category");
 
-      if (activeCategory === "residential") {
+      if (activeCategory === "residential" || activeCategory === "commercial") {
         subTabsContainer.style.display = "flex";
+        const activeSubBtn = document.querySelector("#sub-category-tabs .sub-tab-btn.active");
+        activeSub = activeSubBtn ? activeSubBtn.getAttribute("data-sub") : "plot";
       } else {
         subTabsContainer.style.display = "none";
+        activeSub = "plot"; // Industrial & Agricultural only have plots
       }
       renderListings();
     });
@@ -469,20 +543,75 @@ function initializeListings() {
     });
   }
 
+  // Setup Client Edit Mode toggle
+  const toggleEditModeBtn = document.getElementById("toggle-edit-mode-btn");
+  const editModeAdvisory = document.getElementById("edit-mode-advisory");
+  
+  if (toggleEditModeBtn) {
+    toggleEditModeBtn.addEventListener("click", () => {
+      isEditModeActive = !isEditModeActive;
+      
+      if (isEditModeActive) {
+        toggleEditModeBtn.classList.add("active");
+        toggleEditModeBtn.innerHTML = `<span class="edit-icon">✔️</span> <span class="edit-text">Save & Close Edit Mode</span>`;
+        if (editModeAdvisory) editModeAdvisory.style.display = "block";
+        containerWrapper.classList.add("edit-mode-active");
+      } else {
+        toggleEditModeBtn.classList.remove("active");
+        toggleEditModeBtn.innerHTML = `<span class="edit-icon">✏️</span> <span class="edit-text">Enable Edit Mode</span>`;
+        if (editModeAdvisory) editModeAdvisory.style.display = "none";
+        containerWrapper.classList.remove("edit-mode-active");
+      }
+      renderListings();
+    });
+  }
+
+  // Capture inline text changes and save to localStorage
+  containerWrapper.addEventListener("blur", (e) => {
+    if (!isEditModeActive) return;
+    const target = e.target;
+    if (target.hasAttribute("data-field")) {
+      const cardId = target.getAttribute("data-card-id");
+      const field = target.getAttribute("data-field");
+      const newValue = target.innerText.trim();
+      
+      if (cardId && field) {
+        let customListings = JSON.parse(localStorage.getItem("real_estate_custom_listings_v1") || "{}");
+        if (!customListings[cardId]) {
+          customListings[cardId] = {};
+        }
+        customListings[cardId][field] = newValue;
+        localStorage.setItem("real_estate_custom_listings_v1", JSON.stringify(customListings));
+        console.log(`Saved custom listing ${cardId} field ${field}: ${newValue}`);
+      }
+    }
+  }, true); // Use capture phase because blur doesn't bubble
+
   // Initial render
   renderListings();
 
   function renderListings() {
     containerWrapper.innerHTML = "";
 
-    // If other categories are clicked (Commercial, Industrial, Agricultural)
-    if (activeCategory !== "residential") {
+    // If Agricultural is selected
+    if (activeCategory === "agricultural") {
       renderPlaceholderCategory();
       return;
     }
 
-    const resConfig = RealEstateConfig.residentialDetails[activeSub];
-    if (!resConfig) return;
+    let detailsConfig = null;
+    if (activeCategory === "residential") {
+      detailsConfig = RealEstateConfig.residentialDetails[activeSub];
+    } else if (activeCategory === "commercial") {
+      detailsConfig = RealEstateConfig.commercialDetails[activeSub];
+    } else if (activeCategory === "industrial") {
+      detailsConfig = RealEstateConfig.industrialDetails["plot"]; // Industrial only has plots
+    }
+
+    if (!detailsConfig) {
+      renderPlaceholderCategory();
+      return;
+    }
 
     const regions = [
       { key: "noida", title: "Noida Corridor", badge: "Expressway Gated Zones" },
@@ -491,9 +620,10 @@ function initializeListings() {
     ];
 
     let totalRendered = 0;
+    const customListings = JSON.parse(localStorage.getItem("real_estate_custom_listings_v1") || "{}");
 
     regions.forEach(reg => {
-      const details = resConfig[reg.key];
+      const details = detailsConfig[reg.key];
       if (!details) return;
 
       // Compile all sectors for this region
@@ -534,22 +664,54 @@ function initializeListings() {
 
       // Filter by price range
       list = list.filter(item => {
-        const price = getMockPrice(item.name, activeSub, reg.key);
-        item.priceText = price.text;
-        item.priceVal = price.val;
+        const cardId = `${activeCategory}-${activeSub}-${reg.key}-${item.rawName.replace(/\s+/g, '-').toLowerCase()}`;
+        item.cardId = cardId;
+
+        const price = getMockPrice(item.name, activeSub, reg.key, activeCategory);
+        
+        // Load custom overrides from localStorage if present
+        const customData = customListings[cardId] || {};
+        const finalPriceText = (customData && customData.price) ? customData.price : price.text;
+        item.priceText = finalPriceText;
+
+        // Try to parse raw value for filtering if custom price is set, otherwise use mock val
+        let filterVal = price.val;
+        if (customData && customData.price) {
+          const match = customData.price.match(/[\d\.]+/);
+          if (match) {
+            const num = parseFloat(match[0]);
+            const isLakh = customData.price.toLowerCase().includes("lakh") || customData.price.toLowerCase().includes("l");
+            const isCrore = customData.price.toLowerCase().includes("crore") || customData.price.toLowerCase().includes("cr");
+            const isK = customData.price.toLowerCase().includes("k");
+            
+            if (isCrore) filterVal = num * 10000000;
+            else if (isLakh) filterVal = num * 100000;
+            else if (isK) filterVal = num * 1000;
+            else filterVal = num;
+          }
+        }
+        item.priceVal = filterVal;
 
         if (activePrice === "all") return true;
 
-        if (activeSub === "plot") {
-          // Plot Pricing: value represents per sqm. low < 130000, mid 130000-170000, high > 170000
-          if (activePrice === "low") return price.val < 130000;
-          if (activePrice === "mid") return price.val >= 130000 && price.val <= 170000;
-          if (activePrice === "high") return price.val > 170000;
-        } else {
-          // Flat Pricing: low < 1.5 Cr, mid 1.5 - 4 Cr, high > 4 Cr
-          if (activePrice === "low") return price.val < 15000000;
-          if (activePrice === "mid") return price.val >= 15000000 && price.val <= 40000000;
-          if (activePrice === "high") return price.val > 40000000;
+        if (activeCategory === "residential") {
+          if (activeSub === "plot") {
+            if (activePrice === "low") return filterVal < 130000;
+            if (activePrice === "mid") return filterVal >= 130000 && filterVal <= 170000;
+            if (activePrice === "high") return filterVal > 170000;
+          } else {
+            if (activePrice === "low") return filterVal < 15000000;
+            if (activePrice === "mid") return filterVal >= 15000000 && filterVal <= 40000000;
+            if (activePrice === "high") return filterVal > 40000000;
+          }
+        } else if (activeCategory === "commercial") {
+          if (activePrice === "low") return filterVal < 100000;
+          if (activePrice === "mid") return filterVal >= 100000 && filterVal <= 150000;
+          if (activePrice === "high") return filterVal > 150000;
+        } else if (activeCategory === "industrial") {
+          if (activePrice === "low") return filterVal < 50000;
+          if (activePrice === "mid") return filterVal >= 50000 && filterVal <= 200000;
+          if (activePrice === "high") return filterVal > 200000;
         }
         return true;
       });
@@ -574,42 +736,70 @@ function initializeListings() {
       carousel.className = "carousel-wrapper";
 
       list.forEach((item, idx) => {
-        const card = document.createElement("div");
-        card.className = "listing-card";
+        const cardId = item.cardId;
+        const customData = customListings[cardId] || {};
         
-        // Deterministic features for RERA, Facing, registry
+        // Deterministic features for RERA, Facing, road width
         const hash = Math.abs(getHashCode(item.name));
         const facings = ["North-East Corner", "East Facing", "West Facing", "Road Facing", "Park Facing"];
         const roadSizes = ["12 Meter", "18 Meter", "24 Meter", "45 Meter"];
-        const statusBadges = ["RERA Mutated", "Registry Ready", "YEIDA Approved", "Gated Compound"];
         
+        let defaultStatus = "Available";
+        if (activeCategory === "residential") {
+          const statusBadges = ["RERA Mutated", "Registry Ready", "YEIDA Approved", "Gated Compound"];
+          defaultStatus = statusBadges[(hash >> 2) % statusBadges.length];
+        } else if (activeCategory === "commercial") {
+          const statusBadges = ["Commercial Approved", "High Footfall", "Parking Space", "Registry Ready"];
+          defaultStatus = statusBadges[(hash >> 2) % statusBadges.length];
+        } else if (activeCategory === "industrial") {
+          const statusBadges = ["Industrial Zoning", "3-Phase Power", "YEIDA Mutated", "Wide Road Entrance"];
+          defaultStatus = statusBadges[(hash >> 2) % statusBadges.length];
+        }
+
         const facing = facings[hash % facings.length];
         const road = roadSizes[(hash >> 1) % roadSizes.length];
-        const status = statusBadges[(hash >> 2) % statusBadges.length];
-        const img = getPropertyImage(item.name, activeSub, idx);
+        
+        const status = customData.status || defaultStatus;
+        const img = getPropertyImage(item.name, activeSub, idx, activeCategory);
 
-        const waText = `Hello Lakha's Group, I am interested in Residential ${activeSub === 'plot' ? 'Plot' : 'Flat'} at ${item.name}, ${reg.title}. Price range: ${item.priceText}. Please send more details.`;
+        const titleText = customData.title || item.name;
+        const locationText = customData.location || item.zone;
+        const priceText = customData.price || item.priceText;
+        
+        let propertyTypeLabel = "";
+        if (activeCategory === "residential") {
+          propertyTypeLabel = activeSub === 'plot' ? 'Sq.m Plot' : 'Residential';
+        } else if (activeCategory === "commercial") {
+          propertyTypeLabel = activeSub === 'plot' ? 'Comm. Plot' : 'Comm. Space';
+        } else if (activeCategory === "industrial") {
+          propertyTypeLabel = 'Industrial Plot';
+        }
+
+        const defaultDesc = `Premium clear-title ${activeSub === 'plot' ? 'land parcel' : 'luxury apartment/space'} situated in ${item.name}. Features: ${facing}, ${road} wide front road with water/electricity grid access.`;
+        const descText = customData.desc || defaultDesc;
+
+        const waText = `Hello Lakha's Group, I am interested in ${activeCategory.toUpperCase()} ${activeSub === 'plot' ? 'Plot' : 'Flat/Space'} at ${titleText}, ${reg.title}. Price range: ${priceText}. Please send more details.`;
         const phone = "6396143510";
 
+        const badgeClass = status === "Reserved" ? "badge-reserved" : (status === "Sold Out" ? "badge-sold" : "badge-available");
+
+        const card = document.createElement("div");
+        card.className = "listing-card";
         card.innerHTML = `
           <div class="listing-image-wrapper">
-            <span class="listing-badge badge-available">${status}</span>
-            <img src="${img}" alt="${item.name}">
+            <span class="listing-badge ${badgeClass}" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="status" data-card-id="${cardId}">${status}</span>
+            <img src="${img}" alt="${titleText}">
           </div>
           <div class="listing-info">
             <div class="listing-price-row">
-              <span class="listing-price" style="font-size:1.15rem;">${item.priceText}</span>
-              <span class="listing-size">${activeSub === 'plot' ? 'Sq.m Plot' : 'Residential'}</span>
+              <span class="listing-price" style="font-size:1.15rem;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="price" data-card-id="${cardId}">${priceText}</span>
+              <span class="listing-size">${propertyTypeLabel}</span>
             </div>
-            <h3 class="listing-title" style="margin:10px 0 5px;">${item.name}</h3>
-            <div class="listing-location" style="margin-bottom:12px; font-size:0.9rem; color:var(--color-accent);">
-              <span>&#128205;</span> ${item.zone}
-            </div>
-            <p class="listing-desc" style="font-size:0.85rem; color:rgba(15,23,42,0.7); line-height:1.5; margin-bottom:15px;">
-              Premium clear-title ${activeSub === 'plot' ? 'land parcel' : 'luxury apartment'} situated in ${item.name}. Features: ${facing}, ${road} wide front road with water/electricity grid access.
-            </p>
+            <h3 class="listing-title" style="margin:10px 0 5px;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="title" data-card-id="${cardId}">${titleText}</h3>
+            <div class="listing-location" style="margin-bottom:12px; font-size:0.9rem; color:var(--color-accent);" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="location" data-card-id="${cardId}">${locationText}</div>
+            <p class="listing-desc" style="font-size:0.85rem; color:rgba(15,23,42,0.7); line-height:1.5; margin-bottom:15px;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="desc" data-card-id="${cardId}">${descText}</p>
             <div class="listing-cta" style="display:flex; gap:10px; margin-top:15px;">
-              <a href="contact.html?subject=${encodeURIComponent('Inquiry for ' + item.name)}" class="btn btn-dark" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem;">Book Visit</a>
+              <a href="contact.html?subject=${encodeURIComponent('Inquiry for ' + titleText)}" class="btn btn-dark" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem;">Book Visit</a>
               <a href="https://wa.me/91${phone}?text=${encodeURIComponent(waText)}" target="_blank" class="btn btn-outline" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem; display:flex; align-items:center; justify-content:center; gap:5px;">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/></svg>
                 WhatsApp
@@ -636,8 +826,6 @@ function initializeListings() {
 
   function renderPlaceholderCategory() {
     const titles = {
-      commercial: "Commercial & Retail Space Solutions",
-      industrial: "Industrial & Manufacturing Zones",
       agricultural: "Agricultural & Farm Land Portfolios"
     };
     const titleText = titles[activeCategory] || "Premium Land Catalog";
@@ -647,7 +835,7 @@ function initializeListings() {
       <div style="max-width: 700px; margin: 40px auto; text-align: center; padding: 50px 30px; background: var(--color-bg-alt); border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-premium);">
         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary); margin-bottom: 15px;">${titleText}</h3>
         <p style="font-size: 1.05rem; line-height: 1.7; color: rgba(15,23,42,0.8); margin-bottom: 30px;">
-          We are currently compiling premium off-market government-notified (YEIDA/Noida Authority) layouts for this sector. Contact our land advisory desk directly to receive RERA-certified catalogs, maps, and corporate allotments.
+          We are currently compiling premium agricultural layouts and farmhouse options for this sector. Contact our land advisory desk directly to receive maps, legal title summaries, and site mutation records.
         </p>
         <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
           <a href="https://wa.me/91${phone}?text=Hello%20Lakha's%20Group,%20I%20am%20interested%20in%20obtaining%20information%20for%20${encodeURIComponent(titleText)}" target="_blank" class="btn btn-primary" style="display:flex; align-items:center; gap:8px;">
