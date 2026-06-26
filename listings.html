@@ -193,23 +193,6 @@
         flex: 0 0 280px;
       }
     }
-
-    /* Client Edit Mode Visual Hints */
-    .edit-mode-active [contenteditable="true"] {
-      border: 1px dashed var(--color-accent) !important;
-      background: rgba(197, 168, 128, 0.08) !important;
-      padding: 2px 6px;
-      border-radius: 4px;
-      cursor: text;
-      outline: none;
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-    .edit-mode-active [contenteditable="true"]:focus {
-      background: rgba(197, 168, 128, 0.15) !important;
-      border: 1px solid var(--color-accent) !important;
-      box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.25) !important;
-    }
   </style>
 </head>
 <body>
@@ -266,27 +249,16 @@
       </div>
 
       <!-- Search & Filter Panel -->
-      <div class="search-filter-panel" style="display:flex; flex-direction:column; gap:16px; max-width:720px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%; border-bottom:1px solid rgba(15,23,42,0.08); padding-bottom:12px;">
-          <h4 style="font-family:var(--font-serif); margin:0; font-size:1.1rem; color:var(--color-primary);">Filter & Personalize Directory</h4>
-          <button id="toggle-edit-mode-btn" class="sub-tab-btn" style="border-color:var(--color-accent); color:var(--color-primary); padding: 6px 14px; font-size:0.85rem; display:flex; align-items:center; gap:6px; margin:0;">
-            <span class="edit-icon">✏️</span> <span class="edit-text">Enable Edit Mode</span>
-          </button>
+      <div class="search-filter-panel">
+        <div class="search-input-wrapper">
+          <input type="text" id="listing-search-input" placeholder="Search by sector or project name (e.g. 150, Alpha, Swarn)...">
         </div>
-        <div style="display:flex; gap:15px; width:100%;" class="search-row-layout">
-          <div class="search-input-wrapper">
-            <input type="text" id="listing-search-input" placeholder="Search by sector or project name (e.g. 150, Alpha, Swarn)...">
-          </div>
-          <select class="filter-select" id="listing-price-filter" aria-label="Price range filter" style="min-width:140px;">
-            <option value="all">All Prices</option>
-            <option value="low">Low Range</option>
-            <option value="mid">Mid Range</option>
-            <option value="high">High Range</option>
-          </select>
-        </div>
-        <div id="edit-mode-advisory" style="display:none; font-size:0.8rem; color:#b45309; background:#fffbeb; border:1px solid #fef3c7; padding:10px 14px; border-radius:6px; width:100%; box-sizing:border-box;">
-          <span>💡</span> <strong>Live Edit Mode Active:</strong> Click directly on any card's text (Title, Price, Location, description, status badge) to edit inline. Changes are saved locally.
-        </div>
+        <select class="filter-select" id="listing-price-filter" aria-label="Price range filter">
+          <option value="all">All Prices</option>
+          <option value="low">Low Range</option>
+          <option value="mid">Mid Range</option>
+          <option value="high">High Range</option>
+        </select>
       </div>
 
       <!-- Listings Dynamic Area -->

@@ -366,7 +366,6 @@ function initializeListings() {
   let activeSub = "plot";
   let activeSearchText = "";
   let activePrice = "all";
-  let isEditModeActive = false;
 
   // Simple string hash helper to assign deterministic mock values
   function getHashCode(str) {
@@ -542,50 +541,6 @@ function initializeListings() {
       renderListings();
     });
   }
-
-  // Setup Client Edit Mode toggle
-  const toggleEditModeBtn = document.getElementById("toggle-edit-mode-btn");
-  const editModeAdvisory = document.getElementById("edit-mode-advisory");
-  
-  if (toggleEditModeBtn) {
-    toggleEditModeBtn.addEventListener("click", () => {
-      isEditModeActive = !isEditModeActive;
-      
-      if (isEditModeActive) {
-        toggleEditModeBtn.classList.add("active");
-        toggleEditModeBtn.innerHTML = `<span class="edit-icon">✔️</span> <span class="edit-text">Save & Close Edit Mode</span>`;
-        if (editModeAdvisory) editModeAdvisory.style.display = "block";
-        containerWrapper.classList.add("edit-mode-active");
-      } else {
-        toggleEditModeBtn.classList.remove("active");
-        toggleEditModeBtn.innerHTML = `<span class="edit-icon">✏️</span> <span class="edit-text">Enable Edit Mode</span>`;
-        if (editModeAdvisory) editModeAdvisory.style.display = "none";
-        containerWrapper.classList.remove("edit-mode-active");
-      }
-      renderListings();
-    });
-  }
-
-  // Capture inline text changes and save to localStorage
-  containerWrapper.addEventListener("blur", (e) => {
-    if (!isEditModeActive) return;
-    const target = e.target;
-    if (target.hasAttribute("data-field")) {
-      const cardId = target.getAttribute("data-card-id");
-      const field = target.getAttribute("data-field");
-      const newValue = target.innerText.trim();
-      
-      if (cardId && field) {
-        let customListings = JSON.parse(localStorage.getItem("real_estate_custom_listings_v1") || "{}");
-        if (!customListings[cardId]) {
-          customListings[cardId] = {};
-        }
-        customListings[cardId][field] = newValue;
-        localStorage.setItem("real_estate_custom_listings_v1", JSON.stringify(customListings));
-        console.log(`Saved custom listing ${cardId} field ${field}: ${newValue}`);
-      }
-    }
-  }, true); // Use capture phase because blur doesn't bubble
 
   // Initial render
   renderListings();
@@ -787,17 +742,19 @@ function initializeListings() {
         card.className = "listing-card";
         card.innerHTML = `
           <div class="listing-image-wrapper">
-            <span class="listing-badge ${badgeClass}" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="status" data-card-id="${cardId}">${status}</span>
+            <span class="listing-badge ${badgeClass}">${status}</span>
             <img src="${img}" alt="${titleText}">
           </div>
           <div class="listing-info">
             <div class="listing-price-row">
-              <span class="listing-price" style="font-size:1.15rem;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="price" data-card-id="${cardId}">${priceText}</span>
+              <span class="listing-price" style="font-size:1.15rem;">${priceText}</span>
               <span class="listing-size">${propertyTypeLabel}</span>
             </div>
-            <h3 class="listing-title" style="margin:10px 0 5px;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="title" data-card-id="${cardId}">${titleText}</h3>
-            <div class="listing-location" style="margin-bottom:12px; font-size:0.9rem; color:var(--color-accent);" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="location" data-card-id="${cardId}">${locationText}</div>
-            <p class="listing-desc" style="font-size:0.85rem; color:rgba(15,23,42,0.7); line-height:1.5; margin-bottom:15px;" ${isEditModeActive ? 'contenteditable="true"' : ''} data-field="desc" data-card-id="${cardId}">${descText}</p>
+            <h3 class="listing-title" style="margin:10px 0 5px;">${titleText}</h3>
+            <div class="listing-location" style="margin-bottom:12px; font-size:0.9rem; color:var(--color-accent);">
+              <span>&#128205;</span> ${locationText}
+            </div>
+            <p class="listing-desc" style="font-size:0.85rem; color:rgba(15,23,42,0.7); line-height:1.5; margin-bottom:15px;">${descText}</p>
             <div class="listing-cta" style="display:flex; gap:10px; margin-top:15px;">
               <a href="contact.html?subject=${encodeURIComponent('Inquiry for ' + titleText)}" class="btn btn-dark" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem;">Book Visit</a>
               <a href="https://wa.me/91${phone}?text=${encodeURIComponent(waText)}" target="_blank" class="btn btn-outline" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem; display:flex; align-items:center; justify-content:center; gap:5px;">
