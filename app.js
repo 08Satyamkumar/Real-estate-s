@@ -376,7 +376,7 @@ function initializeListings() {
     return hash;
   }
 
-  // Pick deterministic image URLs for plots, flats, commercial, and industrial properties
+  // Pick deterministic image URLs for plots, flats, commercial, industrial, and agricultural properties
   function getPropertyImage(sector, type, index, category) {
     const plotImages = [
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
@@ -403,12 +403,19 @@ function initializeListings() {
       "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1535557142533-b5e1cc6e2a5d?auto=format&fit=crop&w=600&q=80"
     ];
+    const agriculturalImages = [
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+    ];
     
     let list = type === "plot" ? plotImages : flatImages;
     if (category === "commercial") {
       list = commercialImages;
     } else if (category === "industrial") {
       list = industrialImages;
+    } else if (category === "agricultural") {
+      list = agriculturalImages;
     }
     const hash = Math.abs(getHashCode(sector + index));
     return list[hash % list.length];
@@ -493,6 +500,39 @@ function initializeListings() {
         ];
         return prices[hash % prices.length];
       }
+    } else if (category === "agricultural") {
+      // Noida: 2 Cr to 3 Cr per Bigha
+      if (region === "noida") {
+        const prices = [
+          { text: "₹2.2 Crore / Bigha", val: 22000000 },
+          { text: "₹2.4 Crore / Bigha", val: 24000000 },
+          { text: "₹2.6 Crore / Bigha", val: 26000000 },
+          { text: "₹2.8 Crore / Bigha", val: 28000000 }
+        ];
+        return prices[hash % prices.length];
+      } else if (region === "greaterNoida") {
+        // Greater Noida: 2 Cr to 4 Cr per Bigha
+        const prices = [
+          { text: "₹2.2 Crore / Bigha", val: 22000000 },
+          { text: "₹2.5 Crore / Bigha", val: 25000000 },
+          { text: "₹2.8 Crore / Bigha", val: 28000000 },
+          { text: "₹3.2 Crore / Bigha", val: 32000000 },
+          { text: "₹3.5 Crore / Bigha", val: 35000000 },
+          { text: "₹3.8 Crore / Bigha", val: 38000000 }
+        ];
+        return prices[hash % prices.length];
+      } else if (region === "yeida") {
+        // YEIDA: 30 Lakh to 4 Cr per Bigha
+        const prices = [
+          { text: "₹35 Lakh / Bigha", val: 3500000 },
+          { text: "₹65 Lakh / Bigha", val: 6500000 },
+          { text: "₹1.2 Crore / Bigha", val: 12000000 },
+          { text: "₹2.4 Crore / Bigha", val: 24000000 },
+          { text: "₹3.2 Crore / Bigha", val: 32000000 },
+          { text: "₹3.8 Crore / Bigha", val: 38000000 }
+        ];
+        return prices[hash % prices.length];
+      }
     }
     return { text: "Contact for Price", val: 0 };
   }
@@ -508,9 +548,12 @@ function initializeListings() {
         subTabsContainer.style.display = "flex";
         const activeSubBtn = document.querySelector("#sub-category-tabs .sub-tab-btn.active");
         activeSub = activeSubBtn ? activeSubBtn.getAttribute("data-sub") : "plot";
-      } else {
+      } else if (activeCategory === "industrial") {
         subTabsContainer.style.display = "none";
-        activeSub = "plot"; // Industrial & Agricultural only have plots
+        activeSub = "plot";
+      } else if (activeCategory === "agricultural") {
+        subTabsContainer.style.display = "none";
+        activeSub = "land";
       }
       renderListings();
     });
@@ -548,12 +591,6 @@ function initializeListings() {
   function renderListings() {
     containerWrapper.innerHTML = "";
 
-    // If Agricultural is selected
-    if (activeCategory === "agricultural") {
-      renderPlaceholderCategory();
-      return;
-    }
-
     let detailsConfig = null;
     if (activeCategory === "residential") {
       detailsConfig = RealEstateConfig.residentialDetails[activeSub];
@@ -561,6 +598,8 @@ function initializeListings() {
       detailsConfig = RealEstateConfig.commercialDetails[activeSub];
     } else if (activeCategory === "industrial") {
       detailsConfig = RealEstateConfig.industrialDetails["plot"]; // Industrial only has plots
+    } else if (activeCategory === "agricultural") {
+      detailsConfig = RealEstateConfig.agriculturalDetails["land"]; // Agricultural only has land
     }
 
     if (!detailsConfig) {
@@ -667,6 +706,10 @@ function initializeListings() {
           if (activePrice === "low") return filterVal < 50000;
           if (activePrice === "mid") return filterVal >= 50000 && filterVal <= 200000;
           if (activePrice === "high") return filterVal > 200000;
+        } else if (activeCategory === "agricultural") {
+          if (activePrice === "low") return filterVal < 10000000;
+          if (activePrice === "mid") return filterVal >= 10000000 && filterVal <= 25000000;
+          if (activePrice === "high") return filterVal > 25000000;
         }
         return true;
       });
@@ -709,6 +752,9 @@ function initializeListings() {
         } else if (activeCategory === "industrial") {
           const statusBadges = ["Industrial Zoning", "3-Phase Power", "YEIDA Mutated", "Wide Road Entrance"];
           defaultStatus = statusBadges[(hash >> 2) % statusBadges.length];
+        } else if (activeCategory === "agricultural") {
+          const statusBadges = ["Clear Title", "Mutated Land", "Immediate Registry", "Road Connectivity"];
+          defaultStatus = statusBadges[(hash >> 2) % statusBadges.length];
         }
 
         const facing = facings[hash % facings.length];
@@ -728,9 +774,16 @@ function initializeListings() {
           propertyTypeLabel = activeSub === 'plot' ? 'Comm. Plot' : 'Comm. Space';
         } else if (activeCategory === "industrial") {
           propertyTypeLabel = 'Industrial Plot';
+        } else if (activeCategory === "agricultural") {
+          propertyTypeLabel = 'Agri. Land';
         }
 
-        const defaultDesc = `Premium clear-title ${activeSub === 'plot' ? 'land parcel' : 'luxury apartment/space'} situated in ${item.name}. Features: ${facing}, ${road} wide front road with water/electricity grid access.`;
+        let defaultDesc = "";
+        if (activeCategory === "agricultural") {
+          defaultDesc = `Premium mutated agricultural land parcel situated in ${item.name}. Ideal for farming, farmhouse developments, or long-term corridor investment. Features: ${facing}, ${road} access road.`;
+        } else {
+          defaultDesc = `Premium clear-title ${activeSub === 'plot' ? 'land parcel' : 'luxury apartment/space'} situated in ${item.name}. Features: ${facing}, ${road} wide front road with water/electricity grid access.`;
+        }
         const descText = customData.desc || defaultDesc;
 
         const waText = `Hello Lakha's Group, I am interested in ${activeCategory.toUpperCase()} ${activeSub === 'plot' ? 'Plot' : 'Flat/Space'} at ${titleText}, ${reg.title}. Price range: ${priceText}. Please send more details.`;

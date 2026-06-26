@@ -562,6 +562,26 @@ const RealEstateConfig = {
         others: ["Gaur", "ACE", "ATS", "OASIS"]
       }
     }
+  },
+
+  // Custom Agricultural Details from user images
+  agriculturalDetails: {
+    land: {
+      noida: {
+        priceRange: "₹2 Cr to ₹3 Cr per Bigha",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹2 Cr to ₹4 Cr per Bigha",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹30 Lakh to ₹4 Cr per Bigha",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    }
   }
 };
 
