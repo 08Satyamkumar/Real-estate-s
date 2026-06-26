@@ -470,7 +470,43 @@ const RealEstateConfig = {
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
       bio: "Ensures smooth registry documentation transitions, post-sale document handovers, and coordinate site visit services."
     }
-  ]
+  ],
+
+  // Custom Residential Sector and Price Details from user images
+  residentialDetails: {
+    plot: {
+      noida: {
+        priceRange: "₹1 Lakh to ₹2 Lakh per Sq.m",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹1 Lakh to ₹2 Lakh per Sq.m",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹1 Lakh to ₹1.8 Lakh per Sq.m",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    },
+    flat: {
+      noida: {
+        priceRange: "₹60 Lakh to ₹10 Crore",
+        sectors: ["83", "151", "150", "148", "147", "146", "144"],
+        noidaWestSectors: ["135", "134", "126", "127", "150", "135", "151"]
+      },
+      greaterNoida: {
+        priceRange: "₹60 Lakh to ₹10 Crore",
+        sectors: ["Alpha", "Beta", "Gamma", "Sw. Nagri", "Pi 3", "Omicrone", "Delta", "Sigma", "Chi - V", "Chi - 3", "Pi 2, 3"]
+      },
+      yeida: {
+        priceRange: "₹60 Lakh to ₹10 Crore",
+        sectors: ["25", "17A", "22D", "22-E", "18", "20", "19", "28", "29", "33", "32"],
+        others: ["Gaur", "ACE", "ATS", "OASIS"]
+      }
+    }
+  }
 };
 
 // Expose globally for both module and non-module browser loading
