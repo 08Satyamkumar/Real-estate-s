@@ -565,14 +565,18 @@ header {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
   border: 1px solid rgba(197, 168, 128, 0.18); /* Satin gold border */
-  transition: var(--transition-smooth);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
 .listing-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(197, 168, 128, 0.14), 0 1px 3px rgba(197, 168, 128, 0.05);
-  border-color: var(--color-accent);
+  transform: translateY(-8px) scale(1.015); /* Premium expo lift & scale */
+  box-shadow: 0 30px 60px rgba(197, 168, 128, 0.14), 
+              0 10px 20px rgba(15, 23, 42, 0.03), 
+              0 0 0 1px rgba(197, 168, 128, 0.05); /* Premium gold shadow glow ring */
+  border-color: rgba(197, 168, 128, 0.8);
 }
 .listing-image-wrapper {
   position: relative;
@@ -581,14 +585,37 @@ header {
   margin: 12px 12px 0 12px; /* Insets the image to float beautifully inside the card */
   border-radius: 16px; /* Rounds all 4 corners of the image */
 }
+/* World-Class Light Sweep Glare Overlay */
+.listing-image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: 0.75s;
+  pointer-events: none;
+  z-index: 2;
+}
+.listing-card:hover .listing-image-wrapper::after {
+  left: 150%;
+  transition: 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .listing-image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: var(--transition-smooth);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Apple-grade smooth image zoom curve */
 }
 .listing-card:hover .listing-image-wrapper img {
-  transform: scale(1.05);
+  transform: scale(1.08); /* World-class slow zoom ratio */
 }
 .listing-badge {
   position: absolute;
@@ -653,6 +680,10 @@ header {
   margin-bottom: 8px;
   color: var(--color-primary);
   font-family: var(--font-sans);
+  transition: color 0.3s ease;
+}
+.listing-card:hover .listing-title {
+  color: var(--color-accent-hover);
 }
 .listing-location {
   font-size: 0.85rem;
