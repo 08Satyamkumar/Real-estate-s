@@ -581,7 +581,7 @@ header {
 .listing-image-wrapper {
   position: relative;
   overflow: hidden;
-  height: 215px;
+  height: 235px;
   margin: 12px 12px 0 12px; /* Insets the image to float beautifully inside the card */
   border-radius: 16px; /* Rounds all 4 corners of the image */
 }
@@ -1456,7 +1456,7 @@ footer {
 
   /* Compact & Premium Listing Cards on Mobile Devices */
   .listing-image-wrapper {
-    height: 165px; /* Slightly taller for balanced proportions */
+    height: 185px; /* Taller image proportions on mobile */
     margin: 10px 10px 0 10px; /* Inset margins on mobile */
     border-radius: 12px; /* Rounds floating image corners on mobile */
   }
