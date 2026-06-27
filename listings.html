@@ -189,8 +189,13 @@
       }
     }
     @media (max-width: 576px) {
+      .carousel-wrapper {
+        gap: 16px;
+        padding: 10px 16px 25px 16px;
+      }
       .carousel-wrapper .listing-card {
-        flex: 0 0 270px;
+        flex: 0 0 calc(100% - 16px);
+        scroll-snap-align: center;
       }
     }
   </style>
