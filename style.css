@@ -561,23 +561,25 @@ header {
 }
 .listing-card {
   background: var(--color-text-light);
-  border-radius: var(--border-radius-lg);
+  border-radius: 24px; /* Soft, highly-rounded luxury corners */
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(197, 168, 128, 0.18); /* Satin gold border */
   transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
 }
 .listing-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(197, 168, 128, 0.1), 0 1px 3px rgba(197, 168, 128, 0.05);
+  box-shadow: 0 20px 40px rgba(197, 168, 128, 0.14), 0 1px 3px rgba(197, 168, 128, 0.05);
   border-color: var(--color-accent);
 }
 .listing-image-wrapper {
   position: relative;
   overflow: hidden;
-  height: 220px;
+  height: 200px;
+  margin: 12px 12px 0 12px; /* Insets the image to float beautifully inside the card */
+  border-radius: 16px; /* Rounds all 4 corners of the image */
 }
 .listing-image-wrapper img {
   width: 100%;
@@ -596,7 +598,7 @@ header {
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px; /* Slightly rounded to match the image corners */
   letter-spacing: 1px;
   z-index: 5;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
@@ -617,7 +619,7 @@ header {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .listing-info {
-  padding: 24px;
+  padding: 16px 20px 20px 20px; /* Reduced top padding to flow nicely with the floating image */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -695,7 +697,7 @@ header {
   flex: 1;
   padding: 10px 15px;
   font-size: 0.82rem;
-  border-radius: var(--border-radius-sm);
+  border-radius: 10px; /* Highly-rounded modern buttons matching the card geometry */
 }
 
 /* 8. ROI Investment Calculator Section */
@@ -1423,10 +1425,12 @@ footer {
 
   /* Compact & Premium Listing Cards on Mobile Devices */
   .listing-image-wrapper {
-    height: 160px; /* Reduced from 220px to prevent extra vertical length */
+    height: 150px; /* Reduced from 220px to prevent extra vertical length */
+    margin: 10px 10px 0 10px; /* Inset margins on mobile */
+    border-radius: 12px; /* Rounds floating image corners on mobile */
   }
   .listing-info {
-    padding: 16px; /* Narrower padding for cleaner margins */
+    padding: 12px 16px 16px 16px; /* Compact padding on mobile */
   }
   .listing-price {
     font-size: 1.15rem;
