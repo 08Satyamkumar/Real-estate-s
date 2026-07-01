@@ -817,7 +817,7 @@ function initializeListings() {
             </div>
             <p class="listing-desc" style="font-size:0.85rem; color:rgba(15,23,42,0.7); line-height:1.5; margin-bottom:15px;">${descText}</p>
             <div class="listing-cta" style="display:flex; gap:10px; margin-top:15px;">
-              <a href="contact.html?subject=${encodeURIComponent('Inquiry for ' + titleText)}" class="btn btn-dark" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem;">Book Visit</a>
+              <a href="contact.html?plot=${encodeURIComponent(titleText + ' (' + activeCategory.toUpperCase() + ')')}" class="btn btn-dark" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem;">Book Visit</a>
               <a href="https://wa.me/91${phone}?text=${encodeURIComponent(waText)}" target="_blank" class="btn btn-outline" style="flex:1; text-align:center; padding: 10px 5px; font-size:0.85rem; display:flex; align-items:center; justify-content:center; gap:5px;">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.73-1.464L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.795 1.451 5.378 0 9.757-4.373 9.76-9.743.002-2.592-1.008-5.03-2.846-6.87C16.32 2.146 13.883 1.14 11.3 1.14 5.922 1.14 1.543 5.513 1.54 10.885c-.001 1.702.462 3.364 1.34 4.814l-.993 3.626 3.72-.973zm13.153-6.52c-.29-.145-1.716-.847-1.982-.944-.265-.096-.459-.145-.653.145-.194.29-.752.944-.922 1.139-.17.194-.34.218-.63.073-.29-.145-1.226-.452-2.336-1.442-.864-.77-1.447-1.722-1.617-2.013-.17-.29-.018-.447.127-.592.13-.13.29-.34.436-.509.145-.17.194-.29.291-.485.097-.194.049-.364-.025-.509-.073-.145-.653-1.573-.895-2.155-.236-.569-.475-.492-.653-.501-.17-.008-.364-.01-.557-.01-.194 0-.509.073-.775.364-.265.29-1.012.988-1.012 2.41 0 1.423 1.036 2.798 1.18 2.993.145.194 2.039 3.114 4.939 4.364.69.298 1.229.476 1.649.61.693.22 1.324.19 1.823.115.556-.084 1.716-.701 1.958-1.378.243-.677.243-1.258.17-1.378-.073-.12-.265-.193-.556-.34z"/></svg>
                 WhatsApp
@@ -1034,7 +1034,7 @@ function initializeInquiryForm() {
 
   // Pre-fill fields based on query strings
   const urlParams = new URLSearchParams(window.location.search);
-  const requestedPlot = urlParams.get("plot");
+  const requestedPlot = urlParams.get("plot") || urlParams.get("subject");
   const topic = urlParams.get("topic");
   
   const messageField = document.getElementById("inquiry-message");
