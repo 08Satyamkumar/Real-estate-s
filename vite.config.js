@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: '/Real-estate-s/',
+  base: process.env.VERCEL ? '/' : '/Real-estate-s/',
   build: {
     rollupOptions: {
       input: {
