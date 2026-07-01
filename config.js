@@ -12,7 +12,7 @@ const RealEstateConfig = {
     primaryBg: "#0F172A",   // Midnight Slate Blue
     phone: "+91 63961 43510",
     whatsapp: "https://wa.me/916396143510?text=Hello%20Lakha's%20Group,%20I%20am%20interested%20in%20Yamuna%20Expressway%20plots.",
-    email: "info@lakhaagroup.com",
+    email: "lakhasgroup02@gmail.com",
     address: "Office No. 102, Commercial Hub, Gaur Yamuna City, Gautam Buddha Nagar, UP, India",
     socialLinks: {
       whatsapp: "https://wa.me/916396143510?text=Hello%20Lakha's%20Group,%20I%20am%20interested%20in%20plots.",

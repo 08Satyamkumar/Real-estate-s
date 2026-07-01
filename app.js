@@ -57,6 +57,13 @@ function initializeBranding() {
     link.setAttribute("href", `tel:${brand.phone.replace(/\s+/g, '')}`);
   });
 
+  // Dynamic email links binding
+  const emailLinks = document.querySelectorAll(".company-email-text");
+  emailLinks.forEach(link => {
+    link.textContent = brand.email;
+    link.setAttribute("href", `mailto:${brand.email}`);
+  });
+
   // Dynamic social media links binding
   const socials = brand.socialLinks;
   if (socials) {
@@ -1077,7 +1084,7 @@ function initializeInquiryForm() {
     localStorage.setItem("real_estate_leads", JSON.stringify(localLeads));
 
     // 2. Submit lead email notification via FormSubmit AJAX (100% Free & Automatic)
-    const emailTo = RealEstateConfig.branding.email || "info@lakhaagroup.com";
+    const emailTo = RealEstateConfig.branding.email || "lakhasgroup02@gmail.com";
     fetch(`https://formsubmit.co/ajax/${emailTo}`, {
       method: "POST",
       headers: {
